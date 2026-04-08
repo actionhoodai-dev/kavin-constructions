@@ -52,23 +52,13 @@ export default function AboutPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative aspect-square bg-[#0A1F44] flex items-center justify-center group overflow-hidden border-2 border-accent"
+              className="relative aspect-square flex items-center justify-center group overflow-hidden bg-white border border-gray-100 shadow-lg p-10"
            >
-              <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
               <img 
                 src="/images/kcs-logo.png" 
-                 alt="Kavin Logo" 
-                className="w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-1000 relative z-10"
+                alt="Kavin Logo" 
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-1000"
               />
-              <div className="absolute inset-0 bg-primary/20" />
-              <div className="absolute inset-10 border border-white/10 opacity-50 pointer-events-none" />
-              <div className="relative z-10 text-center flex flex-col items-center p-10">
-                 <div className="w-24 h-24 bg-accent/20 rounded-full flex items-center justify-center mb-6 border border-accent/30 backdrop-blur-sm">
-                    <Award size={48} className="text-accent" />
-                 </div>
-                 <h4 className="text-white text-3xl font-black uppercase tracking-tighter mb-4">Certified Accuracy</h4>
-                 <p className="text-white font-bold uppercase tracking-widest text-[8px] max-w-xs bg-primary/40 px-4 py-2">Licensed Professional Surveying Expertise</p>
-              </div>
            </motion.div>
 
 
