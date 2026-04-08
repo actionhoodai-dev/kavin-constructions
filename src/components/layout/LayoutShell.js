@@ -10,14 +10,18 @@ export default function LayoutShell({ children }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
+  if (isAdmin) {
+    return <main className="flex-grow">{children}</main>;
+  }
+
   return (
     <>
-      {!isAdmin && <Navbar />}
+      <Navbar />
       <PageTransition>
         <main className="flex-grow">{children}</main>
-        {!isAdmin && <Footer />}
+        <Footer />
       </PageTransition>
-      {!isAdmin && <WhatsappButton />}
+      <WhatsappButton />
     </>
   );
 }
