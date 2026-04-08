@@ -7,9 +7,9 @@ import Link from "next/link";
 
 const mockProjects = [
   { id: 1, title: "Modern Residential Villa", location: "Periyar Nagar, Erode", date: "2023", category: "Construction", image: "/images/3d_elevation_render.png" },
-  { id: 2, title: "Commercial Complex", location: "Gandhiji Rd, Erode", date: "2024", category: "Construction", image: "/images/engineer_kavin.png" },
+  { id: 2, title: "Commercial Complex", location: "Gandhiji Rd, Erode", date: "2024", category: "Construction", image: "/images/blueprint_sketch.png" },
   { id: 3, title: "Land Survey Site-A", location: "Veerappan Chatram", date: "2023", category: "Surveying", image: "/images/surveying_action.png" },
-  { id: 4, title: "3D Elevation Elite House", location: "Gobichettipalayam", date: "2023", category: "Design", image: "/images/3d_elevation_render.png" },
+  { id: 4, title: "3D Elevation Elite House", location: "Gobichettipalayam", date: "2023", category: "Design", image: "/images/engineer_kavin.png" },
   { id: 5, title: "Structural Survey B-9", location: "Sathy Road, Erode", date: "2024", category: "Surveying", image: "/images/hero_instrument.png" },
   { id: 6, title: "Industrial Layout Plan", location: "Perundurai SIPCOT", date: "2024", category: "Planning", image: "/images/industrial_layout_plan_nano.png" },
 
@@ -61,11 +61,19 @@ export default function FeaturedProjects() {
             >
               {/* Image with zoom effect */}
               <div className="absolute inset-0 bg-primary/20 transition-all duration-700 group-hover:bg-primary/0 z-10" />
-              <motion.img
-                src={project.image}
-                alt={project.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
+              <motion.div
+                className="absolute inset-0"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 1 }}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  unoptimized={true}
+                  className="object-cover"
+                />
+              </motion.div>
               
               {/* Category Badge */}
               <div className="absolute top-6 left-6 z-20 bg-primary text-white text-[9px] font-black uppercase tracking-widest px-3 py-1 text-center shadow-lg transform -skew-x-12">
