@@ -56,9 +56,9 @@ export default function AboutPage() {
            >
               <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
               <img 
-                src="/images/blueprint_sketch.png" 
-                 alt="Kavin Engineering Heritage" 
-                className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000"
+                src="/images/kcs-logo.png" 
+                 alt="Kavin Logo" 
+                className="w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-1000 relative z-10"
               />
               <div className="absolute inset-0 bg-primary/20" />
               <div className="absolute inset-10 border border-white/10 opacity-50 pointer-events-none" />
@@ -112,23 +112,14 @@ export default function AboutPage() {
                     <span className="text-sm font-bold uppercase tracking-widest text-white/70">Professional Identity Recognized Across The Region</span>
                  </div>
               </div>
-              <div className="relative aspect-square border-8 border-white/5 flex items-center justify-center group overflow-hidden bg-white/5 shadow-2xl">
-                 <div className="absolute inset-0 flex items-center justify-center opacity-30 scale-110 pointer-events-none">
-                    <img 
-                      src="/images/engineer_kavin.png" 
-                      alt="Er. R. Kavin Kumar"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                    />
-                 </div>
-                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-60" />
-                 <div className="relative z-10 text-center p-12">
-                    <h3 className="text-4xl md:text-6xl font-black text-accent uppercase tracking-tighter transition-all group-hover:scale-105 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">ER. KAVIN</h3>
-                    <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white bg-accent/20 px-4 py-1 mt-4 backdrop-blur-sm">Master Of Structural Geometry</p>
-                 </div>
+              <div className="relative aspect-square border-8 border-accent/20 flex flex-col items-center justify-center p-12 overflow-hidden bg-primary shadow-[inset_0_0_50px_rgba(0,0,0,0.5)]">
+                 <h3 className="text-4xl md:text-6xl font-black text-accent uppercase tracking-tighter drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">ER. KAVIN</h3>
+                 <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white bg-accent/20 px-4 py-1 mt-6 backdrop-blur-sm border border-accent/30 text-center">Master Of Structural Geometry</p>
                  {/* Decorative HUD corners */}
-                 <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-accent/50" />
-                 <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-accent/50" />
+                 <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-accent/70" />
+                 <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-accent/70" />
               </div>
+
 
            </div>
         </div>
