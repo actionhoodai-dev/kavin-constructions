@@ -8,18 +8,8 @@ import { cn } from "@/lib/utils";
 
 const filterCategories = ["All", "Surveying", "Construction", "Design", "Planning"];
 
-const defaultProjects = [
-  { id: 1, title: "Modern Residential Villa", location: "Periyar Nagar, Erode", date: "2023", category: "Construction", description: "A luxury 4BHK residential villa integrating modern architecture with sustainable materials. Precise structural execution ensuring long-term durability.", image: "/images/3d_elevation_render.png" },
-  { id: 2, title: "Commercial Office Complex", location: "Gandhiji Rd, Erode", date: "2024", category: "Construction", description: "High-density commercial workspace designed for maximum utility and structural health. Modern facade and ergonomic interior layouts.", image: "/images/blueprint_sketch.png" },
-  { id: 3, title: "Topographic Land Survey Site-A", location: "Veerappan Chatram", date: "2023", category: "Surveying", description: "Detailed topographic mapping for a large-scale industrial layout, providing millimeter accuracy for terrain analysis and development.", image: "/images/surveying_action.png" },
-  { id: 4, title: "3D Elevation Elite House", location: "Gobichettipalayam", date: "2023", category: "Design", description: "Photorealistic 3D visualization and architectural elevation design for a contemporary private residence, focusing on geometric symmetry.", image: "/images/engineer_kavin.png" },
-  { id: 5, title: "Boundary Survey B-9", location: "Sathy Road, Erode", date: "2024", category: "Surveying", description: "Legal boundary verification and site measurement for a commercial development zone, resolving complex alignment issues with precision.", image: "/images/hero_instrument.png" },
-  { id: 6, title: "Industrial Layout Plan", location: "Perundurai SIPCOT", date: "2024", category: "Planning", description: "Comprehensive master planning for an industrial expansion project, optimizing layout for logistical efficiency and regulatory compliance.", image: "/images/industrial_layout_plan_nano.png" },
-];
-
 export default function ProjectsPage() {
-  const { projects: storeProjects, activeFilter, setFilter } = useProjectStore();
-  const projects = [...storeProjects, ...defaultProjects];
+  const { projects, activeFilter, setFilter } = useProjectStore();
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -85,6 +75,15 @@ export default function ProjectsPage() {
         </div>
 
         {/* Project Grid */}
+        {filteredProjects.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-32 text-center">
+            <div className="w-24 h-24 bg-gray-50 flex items-center justify-center mb-8 border-2 border-dashed border-gray-200">
+              <Layers size={40} className="text-gray-300" />
+            </div>
+            <h3 className="text-3xl font-black text-primary uppercase tracking-tighter mb-3">No Projects Yet</h3>
+            <p className="text-gray-400 text-sm font-medium max-w-md">Projects will appear here once they are added through the admin panel.</p>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
            <AnimatePresence mode="popLayout">
              {filteredProjects.map((project, i) => (
@@ -132,6 +131,7 @@ export default function ProjectsPage() {
              ))}
            </AnimatePresence>
         </div>
+        )}
 
         {/* Modal */}
         <AnimatePresence>

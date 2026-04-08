@@ -5,20 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, X, Ruler, Triangle, Box } from "lucide-react";
 import { useProjectStore } from "@/store/useProjectStore";
 
-const defaultGalleryImages = [
-  { id: 1, src: "/images/surveying_action.png", title: "Topographic Survey Site", category: "Survey" },
-  { id: 2, src: "/images/hero_instrument.png", title: "Precision GPS Instrumentation", category: "Survey" },
-  { id: 3, src: "/images/blueprint_sketch.png", title: "Structural Blueprint Draft", category: "Design" },
-  { id: 4, src: "/images/3d_elevation_render.png", title: "3D Elevation Elite House", category: "Design" },
-  { id: 5, src: "/images/industrial_layout_plan_nano.png", title: "Industrial Site Planning", category: "Planning" },
-  { id: 6, src: "/images/site_measurement_new.png", title: "Site Measurement Capture", category: "Survey" },
-  { id: 7, src: "/images/engineer_kavin.png", title: "Construction Site Progress", category: "Construction" },
-];
-
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState(null);
-  const { gallery: storeGallery } = useProjectStore();
-  const galleryImages = [...storeGallery, ...defaultGalleryImages];
+  const { gallery: galleryImages } = useProjectStore();
   return (
     <>
     <div className="bg-white min-h-screen pt-32 pb-24 overflow-hidden relative">
@@ -40,6 +29,15 @@ export default function GalleryPage() {
         </div>
 
         {/* Masonry Grid */}
+        {galleryImages.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-32 text-center">
+            <div className="w-24 h-24 bg-gray-50 flex items-center justify-center mb-8 border-2 border-dashed border-gray-200">
+              <Maximize2 size={40} className="text-gray-300" />
+            </div>
+            <h3 className="text-3xl font-black text-primary uppercase tracking-tighter mb-3">Gallery Is Empty</h3>
+            <p className="text-gray-400 text-sm font-medium max-w-md">Images will appear here once they are uploaded through the admin panel.</p>
+          </div>
+        ) : (
         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
            {galleryImages.map((image, i) => (
              <motion.div
@@ -77,6 +75,7 @@ export default function GalleryPage() {
              </motion.div>
            ))}
         </div>
+        )}
 
         </div>
       </div>
