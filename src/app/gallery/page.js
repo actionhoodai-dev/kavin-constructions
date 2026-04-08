@@ -20,6 +20,7 @@ export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
+    <>
     <div className="bg-white min-h-screen pt-32 pb-24 overflow-hidden relative">
       <div className="fixed inset-0 bg-blueprint-fine opacity-[0.03] pointer-events-none" />
       
