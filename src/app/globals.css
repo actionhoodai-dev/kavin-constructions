@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #1F2937;
+  
+  --primary: #0A1F44;
+  --secondary: #6B7280;
+  --accent: #FBBF24;
+  --charcoal: #1F2937;
+  
+  --primary-foreground: #FFFFFF;
+  --secondary-foreground: #FFFFFF;
+  --accent-foreground: #0A1F44;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-charcoal: var(--charcoal);
+  
+  --font-heading: var(--font-sora);
+  --font-body: var(--font-inter);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Blueprint Pattern */
+.bg-blueprint {
+  background-image: 
+    linear-gradient(rgba(10, 31, 68, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 31, 68, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-blueprint-fine {
+  background-image: 
+    linear-gradient(rgba(10, 31, 68, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 31, 68, 0.03) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0d2757;
+}
