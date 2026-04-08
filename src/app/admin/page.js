@@ -468,12 +468,21 @@ export default function AdminPage() {
                         )}
                      </div>
                      <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary">Image URL</label>
+                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary">Upload Image</label>
                         <input 
-                          className="w-full bg-gray-50 border-2 border-gray-100 py-4 px-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent" 
-                          placeholder="Paste image URL here"
-                          value={formData.image}
-                          onChange={(e) => setFormData({...formData, image: e.target.value})}
+                          type="file"
+                          accept="image/*"
+                          className="w-full bg-gray-50 border-2 border-gray-100 py-3 px-4 font-bold text-sm tracking-widest focus:outline-none focus:border-accent file:mr-4 file:py-2 file:px-4 file:border-0 file:text-[10px] file:font-black file:uppercase file:tracking-widest file:bg-primary file:text-white hover:file:bg-accent hover:file:text-primary cursor-pointer transition-all" 
+                          onChange={(e) => {
+                             const file = e.target.files?.[0];
+                             if (file) {
+                                const reader = new FileReader();
+                                reader.onloadend = () => {
+                                   setFormData({...formData, image: reader.result});
+                                };
+                                reader.readAsDataURL(file);
+                             }
+                          }}
                         />
                      </div>
                      {addMode === "projects" && (
