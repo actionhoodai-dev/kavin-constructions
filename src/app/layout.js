@@ -1,8 +1,6 @@
 import { Sora, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import WhatsappButton from "@/components/ui/WhatsappButton";
+import LayoutShell from "@/components/layout/LayoutShell";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -18,22 +16,14 @@ const inter = Inter({
 
 export const metadata = {
   title: "Kavin | Kavin Construction and Surveyors",
-  description: "Precision Land Surveying & Civil Construction Experts in Erode. Licensed Building Surveyor services including 3D Elevation, Vastu Plan, and more.",
+  description: "Precision Land Surveying & Civil Construction Experts. Licensed Building Surveyor services including 3D Elevation, Vastu Plan, and more.",
 };
-
-
-import PageTransition from "@/components/ui/PageTransition";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${sora.variable} ${inter.variable}`}>
       <body className="min-h-screen flex flex-col font-body bg-white text-charcoal antialiased selection:bg-accent selection:text-primary">
-        <Navbar />
-        <PageTransition>
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </PageTransition>
-        <WhatsappButton />
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );
