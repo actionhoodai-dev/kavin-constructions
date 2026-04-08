@@ -44,14 +44,16 @@ export default function PageTransition({ children }) {
                initial={{ scale: 0.8, opacity: 0 }}
                animate={{ scale: 1, opacity: 1 }}
                transition={{ duration: 0.5 }}
-               className="relative z-10 w-72 h-32 mb-12"
+               className="relative z-10 w-64 h-64 bg-white p-4 rounded-sm shadow-2xl mb-12 flex items-center justify-center"
              >
                 <img 
-                  src="/images/KCS Logo 001-02.png" 
-                  alt="KCS Logo" 
-                  className="w-full h-full object-contain invert brightness-0"
+                  src="/images/kcs-logo.png" 
+                  alt="Kavin Logo" 
+                  className="w-full h-full object-contain"
                 />
              </motion.div>
+
+
              
              {/* Technical Progress Bar */}
              <div className="relative w-64 h-1 bg-white/10 overflow-hidden">
@@ -78,13 +80,15 @@ export default function PageTransition({ children }) {
             className="fixed inset-0 z-[150] bg-[#0A1F44] flex items-center justify-center pointer-events-none"
           >
              <div className="absolute inset-0 bg-blueprint-fine opacity-10" />
-             <div className="relative w-48 h-20 opacity-50">
+             <div className="relative w-40 h-40 bg-white p-3 rounded-sm opacity-50 flex items-center justify-center">
                 <img 
-                  src="/images/KCS Logo 001-02.png" 
-                  alt="KCS Logo" 
-                  className="w-full h-full object-contain invert brightness-0"
+                  src="/images/kcs-logo.png" 
+                  alt="Kavin Logo" 
+                  className="w-full h-full object-contain"
                 />
-             </div>
+              </div>
+
+
           </motion.div>
         )}
       </AnimatePresence>

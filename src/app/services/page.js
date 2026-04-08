@@ -5,6 +5,8 @@ import { Ruler, Box, Compass, Triangle, Pencil, CheckCircle, ArrowRight, Grid, L
 import { SERVICES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
+
 
 const iconMap = {
   Ruler, Box, Compass, Triangle, Pencil, Grid, Layers, MapPin, Gauge
@@ -13,12 +15,15 @@ const iconMap = {
 const serviceImages = {
   "land-survey": "/images/surveying_action.png",
   "vastu-plan": "/images/blueprint_sketch.png",
-  "3d-elevation": "https://images.unsplash.com/photo-1600585154340-be6191bcbe10?auto=format&fit=crop&q=80&w=1200",
-  "building-est": "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1200",
+  "3d-elevation": "/images/3d_elevation_render.png",
+  "building-est": "/images/engineer_kavin.png",
   "civil-const": "/images/hero_instrument.png",
-  "layout-planning": "https://images.unsplash.com/photo-1503387762-592dee58c460?auto=format&fit=crop&q=80&w=1200",
-  "site-measurement": "https://images.unsplash.com/photo-1532187863486-abf9bdad3b6c?auto=format&fit=crop&q=80&w=1200"
+  "layout-planning": "/images/industrial_layout_plan_nano.png",
+  "site-measurement": "/images/site_measurement_new.png"
 };
+
+
+
 
 const extendedServices = [
   ...SERVICES,
@@ -86,29 +91,21 @@ export default function ServicesPage() {
                        {/* Service Image Background */}
                        {serviceImages[service.id] && (
                         <div className="absolute inset-0 z-0">
-                           <img 
+                           <Image 
                               src={serviceImages[service.id]} 
                               alt={service.title} 
-                              className="w-full h-full object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000"
+                              fill
+                              unoptimized={true}
+                              className="object-cover transition-transform duration-1000 group-hover:scale-110"
                            />
-                           <div className="absolute inset-0 bg-primary/20 transition-opacity" />
                         </div>
                        )}
 
-                       <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
-                       <Icon className={cn(
-                         "w-48 h-48 transition-transform duration-1000 group-hover:scale-110 relative z-10",
-                         service.main ? "text-accent fill-accent/5 opacity-30" : "text-primary/10 fill-primary/5"
-                       )} />
                        
-                       <div className="absolute inset-10 border border-white/5 opacity-50 z-20 pointer-events-none" />
-                       <div className="relative z-30 text-center flex flex-col items-center">
-                          <Icon size={80} className={cn(
-                            "mb-6 drop-shadow-2xl",
-                            service.main ? "text-accent" : "text-primary opacity-0 group-hover:opacity-100 transition-opacity"
-                          )} />
-                          {service.main && <span className="text-accent font-black uppercase tracking-[0.4em] text-[10px] bg-primary/40 px-3 py-1 backdrop-blur-sm">Primary Core Service</span>}
-                       </div>
+                       <div className="absolute inset-0 bg-blueprint opacity-5 pointer-events-none" />
+                       <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent pointer-events-none" />
+                       
+                       <div className="absolute inset-10 border border-white/10 opacity-30 z-20 pointer-events-none" />
                        
                        {/* Animated Lines Decoration */}
                        <motion.div 
@@ -122,6 +119,7 @@ export default function ServicesPage() {
                           className="absolute top-0 right-10 w-[1px] h-32 bg-primary/20 pointer-events-none z-40" 
                        />
                     </div>
+
                  </div>
 
 

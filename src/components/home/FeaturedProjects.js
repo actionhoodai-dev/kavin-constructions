@@ -6,13 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 const mockProjects = [
-  { id: 1, title: "Modern Residential Villa", location: "Periyar Nagar, Erode", date: "2023", category: "Construction", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" },
-  { id: 2, title: "Commercial Complex", location: "Gandhiji Rd, Erode", date: "2024", category: "Construction", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" },
-  { id: 3, title: "Land Survey Site-A", location: "Veerappan Chatram", date: "2023", category: "Surveying", image: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=800" },
-  { id: 4, title: "3D Elevation Elite House", location: "Gobichettipalayam", date: "2023", category: "Design", image: "https://images.unsplash.com/photo-1600585154340-be6191bcbe10?auto=format&fit=crop&q=80&w=800" },
-  { id: 5, title: "Structural Survey B-9", location: "Sathy Road, Erode", date: "2024", category: "Surveying", image: "https://images.unsplash.com/photo-1503387762-592dee58c460?auto=format&fit=crop&q=80&w=800" },
-  { id: 6, title: "Industrial Layout Plan", location: "Perundurai SIPCOT", date: "2024", category: "Planning", image: "https://images.unsplash.com/photo-1590674899484-d5640e52263d?auto=format&fit=crop&q=80&w=800" },
+  { id: 1, title: "Modern Residential Villa", location: "Periyar Nagar, Erode", date: "2023", category: "Construction", image: "/images/3d_elevation_render.png" },
+  { id: 2, title: "Commercial Complex", location: "Gandhiji Rd, Erode", date: "2024", category: "Construction", image: "/images/engineer_kavin.png" },
+  { id: 3, title: "Land Survey Site-A", location: "Veerappan Chatram", date: "2023", category: "Surveying", image: "/images/surveying_action.png" },
+  { id: 4, title: "3D Elevation Elite House", location: "Gobichettipalayam", date: "2023", category: "Design", image: "/images/3d_elevation_render.png" },
+  { id: 5, title: "Structural Survey B-9", location: "Sathy Road, Erode", date: "2024", category: "Surveying", image: "/images/hero_instrument.png" },
+  { id: 6, title: "Industrial Layout Plan", location: "Perundurai SIPCOT", date: "2024", category: "Planning", image: "/images/industrial_layout_plan_nano.png" },
+
+
 ];
+
 
 export default function FeaturedProjects() {
   return (

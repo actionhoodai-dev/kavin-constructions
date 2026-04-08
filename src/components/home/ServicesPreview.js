@@ -5,10 +5,21 @@ import { Ruler, Box, Compass, Triangle, Pencil, ArrowRight } from "lucide-react"
 import { SERVICES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
+
 
 const iconMap = {
   Ruler, Box, Compass, Triangle, Pencil
 };
+
+const serviceImages = {
+  "land-survey": "/images/surveying_action.png",
+  "vastu-plan": "/images/blueprint_sketch.png",
+  "3d-elevation": "/images/3d_elevation_render.png",
+  "building-est": "/images/engineer_kavin.png",
+  "civil-const": "/images/hero_instrument.png"
+};
+
 
 export default function ServicesPreview() {
   return (
@@ -47,7 +58,6 @@ export default function ServicesPreview() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-gray-100">
           {SERVICES.slice(0, 5).map((service, index) => {
-            const Icon = iconMap[service.icon];
             return (
               <motion.div
                 key={service.id}
@@ -56,42 +66,47 @@ export default function ServicesPreview() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className={cn(
-                  "relative group border-r border-b border-gray-100 p-10 transition-all overflow-hidden",
-                  service.main ? "lg:col-span-2 bg-primary text-white" : "hover:bg-gray-50"
+                  "relative group border-r border-b border-gray-100 p-10 transition-all overflow-hidden h-[400px] flex flex-col justify-end",
+                  service.main ? "lg:col-span-2 bg-primary" : "bg-white"
                 )}
               >
-                {/* Background Blueprint for card */}
-                {service.main && (
-                   <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
-                )}
-                
-                <div className="relative z-10">
-                  <div className={cn(
-                    "w-16 h-16 flex items-center justify-center transition-transform duration-500 group-hover:rotate-[15deg] group-hover:scale-110 mb-8",
-                    service.main ? "bg-accent/10 border border-accent/20" : "bg-primary/5 border border-primary/10"
-                  )}>
-                    <Icon className={cn("w-8 h-8", service.main ? "text-accent" : "text-primary")} />
-                  </div>
+                {/* Visual Background */}
+                <div className="absolute inset-0 z-0">
+                   <Image 
+                      src={serviceImages[service.id]} 
+                      alt={service.title} 
+                      fill
+                      unoptimized={true}
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                   />
+                   <div className={cn(
 
+                     "absolute inset-0 transition-opacity",
+                     service.main ? "bg-primary/60 group-hover:bg-primary/40" : "bg-white/80 group-hover:bg-white/60"
+                   )} />
+                   <div className="absolute inset-0 bg-blueprint opacity-5 pointer-events-none" />
+                </div>
+                
+                <div className="relative z-10 pointer-events-none">
                   <h3 className={cn(
-                    "text-2xl font-black uppercase tracking-tighter mb-4",
-                    service.main ? "text-white md:text-4xl" : "text-primary"
+                    "text-2xl md:text-4xl font-black uppercase tracking-tighter mb-4",
+                    service.main ? "text-white" : "text-primary"
                   )}>
                     {service.title}
                   </h3>
                   
                   <p className={cn(
-                    "text-sm mb-8 leading-relaxed max-w-sm font-medium",
-                    service.main ? "text-gray-300 md:text-lg" : "text-gray-500"
+                    "text-sm mb-6 leading-relaxed max-w-sm font-medium",
+                    service.main ? "text-gray-200" : "text-gray-600"
                   )}>
                     {service.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {service.features.map(f => (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {service.features.slice(0, 2).map(f => (
                       <span key={f} className={cn(
                         "text-[9px] font-bold uppercase tracking-[0.2em] px-2 py-1",
-                        service.main ? "bg-white/10 text-white" : "bg-primary/5 text-secondary"
+                        service.main ? "bg-accent text-primary" : "bg-primary text-white"
                       )}>
                         {f}
                       </span>
@@ -99,7 +114,7 @@ export default function ServicesPreview() {
                   </div>
 
                   <Link href={`/services#${service.id}`} className={cn(
-                    "inline-flex items-center text-xs font-black uppercase tracking-widest group/link",
+                    "inline-flex items-center text-xs font-black uppercase tracking-widest group/link pointer-events-auto",
                     service.main ? "text-accent" : "text-primary"
                   )}>
                     Details <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/link:translate-x-2" />
@@ -114,6 +129,7 @@ export default function ServicesPreview() {
               </motion.div>
             );
           })}
+
           
           {/* Decorative Technical Card */}
           <div className="bg-accent p-10 flex flex-col justify-center border-r border-b border-gray-100 group">

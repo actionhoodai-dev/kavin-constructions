@@ -24,7 +24,7 @@ export default function WhatsappButton() {
           
           {/* Tooltip */}
           <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-primary text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-[4px_4px_0px_0px_#FBBF24]">
-             Chat with KCS Expert
+             Chat with Kavin Expert
           </div>
         </div>
       </Link>

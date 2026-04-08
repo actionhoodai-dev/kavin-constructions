@@ -42,7 +42,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-xl md:text-2xl text-secondary max-w-2xl leading-relaxed font-medium"
           >
-            KAVIN Construction and Surveyors (KCS) is a multidisciplinary engineering powerhouse based in Erode, committed to technical accuracy and structural excellence.
+            KAVIN Construction and Surveyors (Kavin) is a multidisciplinary engineering powerhouse committed to technical accuracy and structural excellence.
           </motion.p>
         </div>
 
@@ -57,7 +57,7 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
               <img 
                 src="/images/blueprint_sketch.png" 
-                alt="KCS Engineering Heritage" 
+                 alt="Kavin Engineering Heritage" 
                 className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-primary/20" />
@@ -75,7 +75,7 @@ export default function AboutPage() {
            <div className="space-y-8">
               <h2 className="text-4xl md:text-5xl font-black text-primary uppercase tracking-tighter leading-tight">Our <span className="text-accent underline decoration-primary/5">Legacy</span> Of Structural Integrity</h2>
               <p className="text-gray-600 text-lg leading-relaxed font-medium">
-                Established with a vision to redefine the surveying and construction landscape in Tamil Nadu, KCS has grown under the meticulous leadership of Er. R. Kavin Kumar. Our firm stands at the intersection of traditional surveying accuracy and modern architectural design.
+                Established with a vision to redefine the surveying and construction landscape in Tamil Nadu, Kavin has grown under the meticulous leadership of Er. R. Kavin Kumar. Our firm stands at the intersection of traditional surveying accuracy and modern architectural design.
               </p>
               <p className="text-gray-600 text-lg leading-relaxed font-medium">
                 We don't just measure land; we interpret its potential. We don't just build walls; we engineer structural environments that are sustainable, safe, and geometrically perfect.
@@ -105,11 +105,11 @@ export default function AboutPage() {
                  <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6">Er. R. Kavin Kumar</h2>
                  <p className="text-accent text-lg font-black uppercase tracking-[0.4em] mb-8">DCE., B.E. | Licensed Surveyor</p>
                  <p className="text-gray-400 text-lg leading-relaxed font-medium mb-10 italic">
-                   "Engineering is the art of organizing design and craft through the lens of mathematical precision. At KCS, every line we draw and every foundation we lay is a testament to this philosophy."
+                   "Engineering is the art of organizing design and craft through the lens of mathematical precision. At Kavin, every line we draw and every foundation we lay is a testament to this philosophy."
                  </p>
                  <div className="flex space-x-4">
                     <User className="text-accent group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-bold uppercase tracking-widest text-white/70">Professional Identity Recognized Across Erode</span>
+                    <span className="text-sm font-bold uppercase tracking-widest text-white/70">Professional Identity Recognized Across The Region</span>
                  </div>
               </div>
               <div className="relative aspect-square border-8 border-white/5 flex items-center justify-center group overflow-hidden bg-white/5 shadow-2xl">

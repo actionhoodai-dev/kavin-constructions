@@ -92,7 +92,8 @@ export default function AboutPreview() {
               transition={{ delay: 0.1 }}
               className="text-gray-600 text-lg leading-relaxed font-medium"
             >
-              KAVIN Construction and Surveyors (KCS) is a multidisciplinary engineering firm based in Erode, specialized in elite land surveying and precision civil works. Under the leadership of licensed surveyor Er. R. Kavin Kumar, we bridge the gap between architectural vision and technical accuracy.
+              KAVIN Construction and Surveyors (Kavin) is a multidisciplinary engineering firm based in Erode, specialized in elite land surveying and precision civil works. Under the leadership of licensed surveyor Er. R. Kavin Kumar, we bridge the gap between architectural vision and technical accuracy.
+
             </motion.p>
 
             <motion.div 

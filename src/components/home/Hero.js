@@ -48,7 +48,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-white shadow-2xl rounded-2xl border border-primary/10 overflow-hidden flex flex-col items-center justify-center p-4">
             <img 
                src="/images/hero_instrument.png" 
-               alt="KCS Precision Instrument"
+               alt="Kavin Precision Instrument"
                className="w-full h-full object-cover rounded-xl"
             />
             {/* Technical Labels Overlay */}

@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 
 const services = [
@@ -89,19 +91,29 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center group">
-              <div className="relative h-16 w-64">
-                <img 
-                  src="/images/KCS Logo 001-02.png" 
+              <div className="relative h-16 w-16 bg-white p-1 rounded-sm shadow-xl flex items-center justify-center overflow-hidden">
+                <Image 
+                  src="/images/kcs-logo.png" 
                   alt="KAVIN CONSTRUCTIONS AND SURVEYORS"
-                  className="h-full w-full object-contain object-left invert brightness-0"
+                  fill
+                  unoptimized={true}
+                  className="object-contain p-1"
                 />
               </div>
+
+              <div className="ml-4 flex flex-col">
+                <span className="text-3xl font-black tracking-tighter leading-none text-white">KAVIN</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent leading-none">CONSTRUCTIONS & SURVEYORS</span>
+              </div>
+
             </Link>
 
+
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-              Precision land surveying and elite civil construction services in Erode. 
+              Precision land surveying and elite civil construction services. 
               Engineering structural excellence with geometric accuracy.
             </p>
+
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <Link key={social.name} href={social.href} className="w-10 h-10 border border-gray-700 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-primary transition-all rounded shadow-md" title={social.name}>
@@ -182,7 +194,8 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-bold uppercase tracking-[0.2em]">
-          <p>© {new Date().getFullYear()} KCS - Kavin Constructions and Surveyors.</p>
+          <p>© {new Date().getFullYear()} Kavin Constructions and Surveyors.</p>
+
           <p className="mt-4 md:mt-0">Precision | Geometry | Structural Excellence</p>
         </div>
       </div>

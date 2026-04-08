@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Ruler, Triangle } from "lucide-react";
@@ -42,14 +44,23 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative h-12 w-48">
-              <img 
-                src="/images/KCS Logo 001-02.png" 
+            <div className="relative h-14 w-14 bg-white p-1 rounded-sm shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden">
+              <Image 
+                src="/images/kcs-logo.png" 
                 alt="KAVIN CONSTRUCTIONS AND SURVEYORS"
-                className="h-full w-full object-contain object-left"
+                fill
+                unoptimized={true}
+                className="object-contain p-1"
               />
             </div>
+
+            <div className="ml-3 hidden sm:flex flex-col">
+              <span className="text-xl font-black tracking-tighter leading-none text-primary">KAVIN</span>
+              <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-secondary leading-none">CONSTRUCTIONS & SURVEYORS</span>
+            </div>
+
           </Link>
+
 
 
           {/* Desktop Nav */}
@@ -101,6 +112,19 @@ export default function Navbar() {
             className="fixed inset-0 top-[72px] bg-white z-40 md:hidden flex flex-col p-8 bg-blueprint"
           >
             <div className="flex flex-col space-y-6">
+              <div className="mb-4">
+                 <div className="relative h-20 w-20 bg-white p-2 shadow-xl border border-gray-100 flex items-center justify-center overflow-hidden">
+                    <Image 
+                      src="/images/kcs-logo.png" 
+                      alt="Kavin Logo" 
+                      fill
+                      unoptimized={true}
+                      className="object-contain p-2"
+                    />
+                 </div>
+              </div>
+
+
               {navLinks.map((link) => (
                 <Link
                   key={link.name}

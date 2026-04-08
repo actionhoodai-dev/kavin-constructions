@@ -230,7 +230,8 @@ export default function ContactPage() {
                    <Globe size={48} className="text-accent mb-4 animate-spin-slow" />
                    <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Map Engine Active</p>
                 </div>
-                {/* Real Google Map Embed for KCS */}
+                {/* Real Google Map Embed for Kavin */}
+
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.0199725689613!2d77.72481387402492!3d11.333250648678332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba96fdc947c1361%3A0xf911f0737052b33d!2sKavin%20construction%20and%20surveyors(KCS)!5e0!3m2!1sen!2sin!4v1775587436012!5m2!1sen!2sin" 
                   className="absolute inset-0 w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-1000 opacity-80 hover:opacity-100"

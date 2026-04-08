@@ -23,7 +23,7 @@ export default function AdminPage() {
        setIsAuthenticated(true);
        setLoginError("");
     } else {
-       setLoginError("Invalid credentials for KCS Admin Access Control.");
+       setLoginError("Invalid credentials for Kavin Admin Access Control.");
     }
   };
 
@@ -88,7 +88,7 @@ export default function AdminPage() {
            </form>
            
            <div className="mt-12 text-center">
-              <p className="text-[8px] font-black uppercase tracking-[0.5em] text-gray-400">Restricted Access | KCS Engineering Standards Apply</p>
+              <p className="text-[8px] font-black uppercase tracking-[0.5em] text-gray-400">Restricted Access | Kavin Engineering Standards Apply</p>
            </div>
         </motion.div>
 
@@ -110,7 +110,7 @@ export default function AdminPage() {
             
             <div className="relative">
                <div className="mb-12">
-                  <h1 className="text-4xl font-black tracking-tighter leading-none mb-1">KCS</h1>
+                  <h1 className="text-4xl font-black tracking-tighter leading-none mb-1">Kavin</h1>
                   <p className="text-[8px] font-black uppercase tracking-[0.3em] text-accent">Control Interface</p>
                </div>
                
@@ -233,7 +233,7 @@ export default function AdminPage() {
                           <tbody>
                              {projects.map((project, i) => (
                                <tr key={project.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors group">
-                                  <td className="px-6 py-6 text-[10px] font-black text-gray-300 group-hover:text-primary transition-colors">00{project.id}-KCS</td>
+                                  <td className="px-6 py-6 text-[10px] font-black text-gray-300 group-hover:text-primary transition-colors">00{project.id}-Kavin</td>
                                   <td className="px-6 py-6">
                                      <div className="flex items-center space-x-3">
                                         <div className="w-10 h-10 overflow-hidden bg-gray-100">

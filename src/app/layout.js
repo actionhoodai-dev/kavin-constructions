@@ -17,9 +17,10 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "KCS | KAVIN Construction and Surveyors",
+  title: "Kavin | Kavin Construction and Surveyors",
   description: "Precision Land Surveying & Civil Construction Experts in Erode. Licensed Building Surveyor services including 3D Elevation, Vastu Plan, and more.",
 };
+
 
 import PageTransition from "@/components/ui/PageTransition";
 
