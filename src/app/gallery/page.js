@@ -77,54 +77,56 @@ export default function GalleryPage() {
            ))}
         </div>
 
-        {/* Lightbox */}
-        <AnimatePresence>
-           {selectedImage && (
-             <motion.div
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               exit={{ opacity: 0 }}
-               className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 pointer-events-none"
-             >
-                <div onClick={() => setSelectedImage(null)} className="absolute inset-0 bg-primary/98 backdrop-blur-2xl pointer-events-auto" />
-                
-                <motion.div
-                  initial={{ scale: 0.9 }}
-                  animate={{ scale: 1 }}
-                  exit={{ scale: 0.9 }}
-                  className="relative z-10 w-full max-w-7xl max-h-full flex flex-col pointer-events-auto"
-                >
-                   <button onClick={() => setSelectedImage(null)} className="absolute -top-12 right-0 text-white hover:text-accent transition-colors flex items-center space-x-2 font-black uppercase tracking-widest text-[10px]">
-                      Close Viewer <X size={24} />
-                   </button>
-                   
-                   <div className="relative aspect-video lg:aspect-auto flex-grow overflow-hidden border-2 border-white/10 group">
-                      <img src={selectedImage.src} className="w-full h-full object-contain bg-black/20" />
-                      
-                      {/* Tech Info HUD */}
-                      <div className="absolute bottom-10 left-10 p-8 border-l border-accent backdrop-blur-sm bg-primary/20">
-                         <h3 className="text-4xl font-black text-white uppercase tracking-tighter mb-2">{selectedImage.title}</h3>
-                         <div className="flex items-center space-x-6">
-                            <div className="flex items-center space-x-2 text-accent text-[10px] font-black uppercase tracking-[0.3em]">
-                               <Triangle size={14} />
-                               <span>Precision Capture</span>
-                            </div>
-                            <div className="w-px h-4 bg-white/20" />
-                            <div className="text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">{selectedImage.category} Archive</div>
-                         </div>
-                      </div>
-                      
-                      {/* Decorative HUD Elements */}
-                      <div className="absolute top-10 right-10 flex flex-col space-y-4 opacity-50">
-                         <div className="w-20 h-[1px] bg-white group-hover:w-32 transition-all duration-1000" />
-                         <div className="w-12 h-[1px] bg-accent self-end group-hover:w-20 transition-all duration-1000" />
-                      </div>
-                   </div>
-                </motion.div>
-             </motion.div>
-           )}
-        </AnimatePresence>
+        </div>
       </div>
-    </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+         {selectedImage && (
+           <motion.div
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             exit={{ opacity: 0 }}
+             className="fixed inset-0 z-[99999] flex items-center justify-center p-4 md:p-10 pointer-events-none"
+           >
+              <div onClick={() => setSelectedImage(null)} className="absolute inset-0 bg-primary/98 backdrop-blur-2xl pointer-events-auto" />
+              
+              <motion.div
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                className="relative z-10 w-full max-w-7xl max-h-full flex flex-col pointer-events-auto"
+              >
+                 <button onClick={() => setSelectedImage(null)} className="absolute -top-12 right-0 text-white hover:text-accent transition-colors flex items-center space-x-2 font-black uppercase tracking-widest text-[10px]">
+                    Close Viewer <X size={24} />
+                 </button>
+                 
+                 <div className="relative aspect-video lg:aspect-auto flex-grow overflow-hidden border-2 border-white/10 group">
+                    <img src={selectedImage.src} className="w-full h-full object-contain bg-black/20" />
+                    
+                    {/* Tech Info HUD */}
+                    <div className="absolute bottom-10 left-10 p-8 border-l border-accent backdrop-blur-sm bg-primary/20">
+                       <h3 className="text-4xl font-black text-white uppercase tracking-tighter mb-2">{selectedImage.title}</h3>
+                       <div className="flex items-center space-x-6">
+                          <div className="flex items-center space-x-2 text-accent text-[10px] font-black uppercase tracking-[0.3em]">
+                             <Triangle size={14} />
+                             <span>Precision Capture</span>
+                          </div>
+                          <div className="w-px h-4 bg-white/20" />
+                          <div className="text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">{selectedImage.category} Archive</div>
+                       </div>
+                    </div>
+                    
+                    {/* Decorative HUD Elements */}
+                    <div className="absolute top-10 right-10 flex flex-col space-y-4 opacity-50">
+                       <div className="w-20 h-[1px] bg-white group-hover:w-32 transition-all duration-1000" />
+                       <div className="w-12 h-[1px] bg-accent self-end group-hover:w-20 transition-all duration-1000" />
+                    </div>
+                 </div>
+              </motion.div>
+           </motion.div>
+         )}
+      </AnimatePresence>
+    </>
   );
 }
