@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, LogOut, Plus, Edit, Trash2, Settings, Image as ImageIcon, MapPin, Calendar, Clock, Lock, User, Send, CheckCircle, ChevronRight, Ruler, FileText, X, FolderOpen } from "lucide-react";
 import { useProjectStore } from "@/store/useProjectStore";
 import { cn } from "@/lib/utils";
+import { auth } from "@/lib/firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,13 +23,14 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (email === "kavincivil2@gmail.com" && password === "admin123") {
-       setIsAuthenticated(true);
-       setLoginError("");
-    } else {
-       setLoginError("Invalid credentials for Kavin Admin Access Control.");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setIsAuthenticated(true);
+      setLoginError("");
+    } catch (error) {
+      setLoginError("Invalid credentials for Kavin Admin Access Control.");
     }
   };
 
