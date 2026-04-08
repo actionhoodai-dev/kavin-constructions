@@ -3,22 +3,22 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, X, Ruler, Triangle, Box } from "lucide-react";
+import { useProjectStore } from "@/store/useProjectStore";
 
-const galleryImages = [
-  { id: 1, src: "https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1200", title: "Topographic Survey Site", category: "Survey" },
-  { id: 2, src: "https://images.unsplash.com/photo-1503387762-592dee58c460?auto=format&fit=crop&q=80&w=1200", title: "Structural Layout Mapping", category: "Survey" },
-  { id: 3, src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200", title: "Commercial Complex Progress", category: "Construction" },
-  { id: 4, src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200", title: "Modern Villa Exterior", category: "Construction" },
-  { id: 5, src: "https://images.unsplash.com/photo-1590674899484-d5640e52263d?auto=format&fit=crop&q=80&w=1200", title: "Industrial Site Planning", category: "Planning" },
-  { id: 6, src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1200", title: "GPS Surveying Instrumentation", category: "Survey" },
-  { id: 7, src: "https://images.unsplash.com/photo-1600585154340-be6191bcbe10?auto=format&fit=crop&q=80&w=1200", title: "3D Elevation Elite House", category: "Design" },
-  { id: 8, src: "https://images.unsplash.com/photo-1503387837-b159950e7b84?auto=format&fit=crop&q=80&w=1200", title: "Civil Site Foundation Work", category: "Construction" },
-  { id: 9, src: "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&q=80&w=1200", title: "Concrete Quality Control", category: "Construction" },
+const defaultGalleryImages = [
+  { id: 1, src: "/images/surveying_action.png", title: "Topographic Survey Site", category: "Survey" },
+  { id: 2, src: "/images/hero_instrument.png", title: "Precision GPS Instrumentation", category: "Survey" },
+  { id: 3, src: "/images/blueprint_sketch.png", title: "Structural Blueprint Draft", category: "Design" },
+  { id: 4, src: "/images/3d_elevation_render.png", title: "3D Elevation Elite House", category: "Design" },
+  { id: 5, src: "/images/industrial_layout_plan_nano.png", title: "Industrial Site Planning", category: "Planning" },
+  { id: 6, src: "/images/site_measurement_new.png", title: "Site Measurement Capture", category: "Survey" },
+  { id: 7, src: "/images/engineer_kavin.png", title: "Construction Site Progress", category: "Construction" },
 ];
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const { gallery: storeGallery } = useProjectStore();
+  const galleryImages = [...storeGallery, ...defaultGalleryImages];
   return (
     <>
     <div className="bg-white min-h-screen pt-32 pb-24 overflow-hidden relative">
