@@ -13,10 +13,16 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("overview");
   const [showAddModal, setShowAddModal] = useState(false);
   const [addMode, setAddMode] = useState("projects"); // "projects" or "gallery"
-  const { projects, deleteProject, addProject, gallery, deleteGalleryItem, addGalleryItem } = useProjectStore();
+  const [editingItem, setEditingItem] = useState(null);
+  const { 
+    projects, deleteProject, addProject, updateProject,
+    gallery, deleteGalleryItem, addGalleryItem, updateGalleryItem,
+    settings, setSettings 
+  } = useProjectStore();
 
   // Form state
   const [formData, setFormData] = useState({ title: "", category: "Surveying", location: "", image: "", description: "" });
+  const [tempSettings, setTempSettings] = useState(settings);
   const [isUploading, setIsUploading] = useState(false);
 
   // Login State
@@ -37,6 +43,7 @@ export default function AdminPage() {
 
   const resetForm = () => {
     setFormData({ title: "", category: "Surveying", location: "", image: "", description: "" });
+    setEditingItem(null);
   };
 
   const openAddModal = (mode) => {
@@ -45,27 +52,60 @@ export default function AdminPage() {
     setShowAddModal(true);
   };
 
+  const openEditModal = (item, mode) => {
+    setAddMode(mode);
+    setEditingItem(item);
+    setFormData({
+      title: item.title,
+      category: item.category,
+      location: item.location || "",
+      image: item.image || item.src,
+      description: item.description || ""
+    });
+    setShowAddModal(true);
+  };
+
   const handleAddSubmit = () => {
     if (!formData.title || !formData.image) return;
-    const newId = Date.now();
-
-    if (addMode === "projects") {
-      addProject({
-        id: newId,
-        title: formData.title,
-        category: formData.category,
-        location: formData.location,
-        image: formData.image,
-        description: formData.description,
-        date: new Date().getFullYear().toString(),
-      });
+    
+    if (editingItem) {
+      if (addMode === "projects") {
+        updateProject({
+          ...editingItem,
+          title: formData.title,
+          category: formData.category,
+          location: formData.location,
+          image: formData.image,
+          description: formData.description,
+        });
+      } else {
+        updateGalleryItem({
+          ...editingItem,
+          src: formData.image,
+          title: formData.title,
+          category: formData.category,
+        });
+      }
     } else {
-      addGalleryItem({
-        id: newId,
-        src: formData.image,
-        title: formData.title,
-        category: formData.category,
-      });
+      const newId = Date.now();
+      if (addMode === "projects") {
+        addProject({
+          id: newId,
+          title: formData.title,
+          category: formData.category,
+          location: formData.location,
+          image: formData.image,
+          description: formData.description,
+          date: new Date().getFullYear().toString(),
+        });
+      } else {
+        addGalleryItem({
+          id: newId,
+          src: formData.image,
+          title: formData.title,
+          category: formData.category,
+        });
+      }
     }
 
     resetForm();
@@ -324,10 +364,16 @@ export default function AdminPage() {
                                      <span className="text-[10px] font-black uppercase tracking-widest px-2 py-1 bg-primary/5 text-primary">{project.category}</span>
                                   </td>
                                   <td className="px-6 py-6 font-bold text-xs text-gray-500 uppercase tracking-widest">{project.location}</td>
-                                  <td className="px-6 py-6 text-right">
+                                  <td className="px-6 py-6 text-right space-x-2">
+                                     <button 
+                                        onClick={() => openEditModal(project, "projects")}
+                                        className="p-2 text-accent bg-gray-50 hover:bg-accent hover:text-primary transition-all"
+                                     >
+                                        <Edit size={16} />
+                                     </button>
                                      <button 
                                         onClick={() => deleteProject(project.id)}
-                                        className="p-2 text-red-500 hover:bg-red-500 hover:text-white transition-all"
+                                        className="p-2 text-red-500 bg-gray-50 hover:bg-red-500 hover:text-white transition-all"
                                      >
                                         <Trash2 size={16} />
                                      </button>
@@ -378,12 +424,20 @@ export default function AdminPage() {
                             <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4">
                                <p className="text-white text-xs font-black uppercase tracking-widest text-center mb-2">{item.title}</p>
                                <span className="text-accent text-[9px] font-black uppercase tracking-[0.3em] mb-4">{item.category}</span>
-                               <button 
-                                 onClick={() => deleteGalleryItem(item.id)}
-                                 className="p-2 bg-red-500 text-white hover:bg-red-600 transition-colors"
-                               >
-                                 <Trash2 size={16} />
-                               </button>
+                               <div className="flex space-x-2">
+                                 <button 
+                                   onClick={() => openEditModal(item, "gallery")}
+                                   className="p-2 bg-accent text-primary hover:bg-white transition-colors"
+                                 >
+                                   <Edit size={16} />
+                                 </button>
+                                 <button 
+                                   onClick={() => deleteGalleryItem(item.id)}
+                                   className="p-2 bg-red-500 text-white hover:bg-red-600 transition-colors"
+                                 >
+                                   <Trash2 size={16} />
+                                 </button>
+                               </div>
                             </div>
                          </div>
                        ))}
@@ -398,16 +452,40 @@ export default function AdminPage() {
                     <h2 className="text-4xl font-black text-primary uppercase tracking-tighter mb-10 border-b-2 border-gray-100 pb-8 flex items-center">
                        Global <span className="text-accent underline ml-2">CMS Settings</span>
                     </h2>
-                    <div className="max-w-2xl space-y-10">
+                     <div className="max-w-2xl space-y-10">
                        <div className="space-y-3">
                           <label className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">System Contact Phone</label>
-                          <input className="w-full bg-gray-50 border-2 border-gray-100 py-4 px-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent" defaultValue="8072524820" />
+                          <input 
+                            className="w-full bg-gray-50 border-2 border-gray-100 py-4 px-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent" 
+                            value={tempSettings?.phone || ""}
+                            onChange={(e) => setTempSettings({...tempSettings, phone: e.target.value})}
+                          />
                        </div>
                        <div className="space-y-3">
                           <label className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">System Email Gateway</label>
-                          <input className="w-full bg-gray-50 border-2 border-gray-100 py-4 px-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent" defaultValue="kavincivil2@gmail.com" />
+                          <input 
+                            className="w-full bg-gray-50 border-2 border-gray-100 py-4 px-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent" 
+                            value={tempSettings?.email || ""}
+                            onChange={(e) => setTempSettings({...tempSettings, email: e.target.value})}
+                          />
                        </div>
-                       <button className="bg-primary text-white px-12 py-5 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-accent hover:text-primary transition-all shadow-[8px_8px_0px_0px_#FBBF24]">Save Configuration</button>
+                       <div className="space-y-3">
+                          <label className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">Headquarters Address</label>
+                          <textarea 
+                            className="w-full bg-gray-50 border-2 border-gray-100 py-4 px-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent resize-none h-24" 
+                            value={tempSettings?.address || ""}
+                            onChange={(e) => setTempSettings({...tempSettings, address: e.target.value})}
+                          />
+                       </div>
+                       <button 
+                         onClick={() => {
+                           setSettings(tempSettings);
+                           alert("Global configurations successfully updated!");
+                         }}
+                         className="bg-primary text-white px-12 py-5 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-accent hover:text-primary transition-all shadow-[8px_8px_0px_0px_#FBBF24]"
+                       >
+                         Save Configuration
+                       </button>
                     </div>
                  </div>
                )}
@@ -431,7 +509,7 @@ export default function AdminPage() {
                  className="bg-white w-full max-w-2xl p-10 md:p-16 border-4 border-accent relative z-10 shadow-3xl max-h-[90vh] overflow-y-auto"
               >
                   <h3 className="text-3xl font-black text-primary uppercase tracking-tighter mb-10 flex justify-between items-center">
-                     {addMode === "projects" ? "Add New Project" : "Add Gallery Image"}
+                     {editingItem ? `Edit ${addMode === "projects" ? "Project" : "Gallery Image"}` : `Add New ${addMode === "projects" ? "Project" : "Gallery Image"}`}
                      <button onClick={() => setShowAddModal(false)} className="text-gray-400 hover:text-primary transition-colors"><X size={24} /></button>
                   </h3>
                   <div className="space-y-8">

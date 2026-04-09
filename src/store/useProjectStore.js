@@ -9,9 +9,18 @@ export const useProjectStore = create(
     (set) => ({
       projects: INITIAL_PROJECTS,
       gallery: INITIAL_GALLERY,
+      settings: {
+        phone: "8072524820",
+        email: "kavincivil2@gmail.com",
+        address: "Erode, Tamil Nadu, India"
+      },
       activeFilter: "All",
       
       setFilter: (category) => set({ activeFilter: category }),
+      
+      setSettings: (newSettings) => set((state) => ({
+        settings: { ...state.settings, ...newSettings }
+      })),
       
       addProject: (project) => set((state) => ({ 
         projects: [project, ...state.projects] 
