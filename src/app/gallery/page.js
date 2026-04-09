@@ -97,30 +97,32 @@ export default function GalleryPage() {
                 exit={{ scale: 0.9 }}
                 className="relative z-10 w-full max-w-7xl max-h-full flex flex-col pointer-events-auto"
               >
-                 <button onClick={() => setSelectedImage(null)} className="absolute -top-12 right-0 text-white hover:text-accent transition-colors flex items-center space-x-2 font-black uppercase tracking-widest text-[10px]">
-                    Close Viewer <X size={24} />
-                 </button>
+                  <div className="flex justify-end p-2 lg:p-4 shrink-0">
+                     <button onClick={() => setSelectedImage(null)} className="text-white hover:text-accent transition-colors flex items-center space-x-2 font-black uppercase tracking-widest text-[10px]">
+                        Close Viewer <X size={24} />
+                     </button>
+                  </div>
                  
-                 <div className="relative aspect-video lg:aspect-auto flex-grow overflow-hidden border-2 border-white/10 group">
-                    <img src={selectedImage.src} className="w-full h-full object-contain bg-black/20" />
+                 <div className="relative w-full h-auto max-h-[75vh] md:max-h-[85vh] flex-grow flex items-center justify-center overflow-hidden border-2 border-white/10 group bg-black/40">
+                    <img src={selectedImage.src} className="max-w-full max-h-[75vh] md:max-h-[85vh] w-auto h-auto object-contain" />
                     
                     {/* Tech Info HUD */}
-                    <div className="absolute bottom-10 left-10 p-8 border-l border-accent backdrop-blur-sm bg-primary/20">
-                       <h3 className="text-4xl font-black text-white uppercase tracking-tighter mb-2">{selectedImage.title}</h3>
-                       <div className="flex items-center space-x-6">
-                          <div className="flex items-center space-x-2 text-accent text-[10px] font-black uppercase tracking-[0.3em]">
+                    <div className="absolute bottom-4 left-4 md:bottom-10 md:left-10 p-4 md:p-8 border-l border-accent backdrop-blur-sm bg-primary/40 hidden sm:block">
+                       <h3 className="text-lg md:text-3xl font-black text-white uppercase tracking-tighter mb-2">{selectedImage.title}</h3>
+                       <div className="flex items-center space-x-4 md:space-x-6">
+                          <div className="flex items-center space-x-2 text-accent text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em]">
                              <Triangle size={14} />
                              <span>Precision Capture</span>
                           </div>
                           <div className="w-px h-4 bg-white/20" />
-                          <div className="text-white/50 text-[10px] font-black uppercase tracking-[0.2em]">{selectedImage.category} Archive</div>
+                          <div className="text-white/50 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em]">{selectedImage.category} Archive</div>
                        </div>
                     </div>
                     
                     {/* Decorative HUD Elements */}
-                    <div className="absolute top-10 right-10 flex flex-col space-y-4 opacity-50">
-                       <div className="w-20 h-[1px] bg-white group-hover:w-32 transition-all duration-1000" />
-                       <div className="w-12 h-[1px] bg-accent self-end group-hover:w-20 transition-all duration-1000" />
+                    <div className="absolute top-6 right-6 md:top-10 md:right-10 flex flex-col space-y-4 opacity-50 hidden md:flex">
+                       <div className="w-16 md:w-20 h-[1px] bg-white group-hover:w-24 md:group-hover:w-32 transition-all duration-1000" />
+                       <div className="w-10 md:w-12 h-[1px] bg-accent self-end group-hover:w-16 md:group-hover:w-20 transition-all duration-1000" />
                     </div>
                  </div>
               </motion.div>
