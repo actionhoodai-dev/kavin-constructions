@@ -4,11 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageSquare, User, Smartphone, Clock, Globe } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useProjectStore } from "@/store/useProjectStore";
 import { cn } from "@/lib/utils";
 
 export default function ContactPage() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
   const [isSuccess, setIsSuccess] = useState(false);
+  const { settings } = useProjectStore();
 
   const onSubmit = async (data) => {
     // Mock submission
@@ -161,7 +163,7 @@ export default function ContactPage() {
                    </div>
                    <h4 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px]">Rapid Response Lines</h4>
                    <div className="space-y-1">
-                      <p className="text-2xl font-black text-primary tracking-tighter hover:text-accent transition-colors">+91 80725 24820</p>
+                      <p className="text-2xl font-black text-primary tracking-tighter hover:text-accent transition-colors">+91 {settings?.phone || "80725 24820"}</p>
                       <p className="text-lg font-bold text-gray-400 tracking-tighter">+91 99945 77514</p>
                    </div>
                 </motion.div>
@@ -176,7 +178,7 @@ export default function ContactPage() {
                       <Mail className="text-accent" size={24} />
                    </div>
                    <h4 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px]">Official Communication Channel</h4>
-                   <p className="text-lg font-black text-primary tracking-tighter hover:text-accent transition-colors">kavincivil2@gmail.com</p>
+                   <p className="text-lg font-black text-primary tracking-tighter hover:text-accent transition-colors">{settings?.email || "kavincivil2@gmail.com"}</p>
                 </motion.div>
              </div>
 
@@ -194,7 +196,7 @@ export default function ContactPage() {
                     <div className="space-y-2">
                        <h4 className="text-secondary font-black uppercase tracking-[0.3em] text-[10px]">Primary HQ - Erode</h4>
                        <p className="text-xl font-black text-primary tracking-tighter leading-tight group-hover:text-accent transition-colors">
-                          29, A.P.T Road, Veerappan Chatram (PO),<br />Erode – 638004
+                          {settings?.address || "29, A.P.T Road, Veerappan Chatram (PO), Erode – 638004"}
                        </p>
                     </div>
                  </motion.div>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { useProjectStore } from "@/store/useProjectStore";
 
 const services = [
   { name: "Land Surveying", href: "/services" },
@@ -48,6 +49,7 @@ const socialLinks = [
 
 export default function Footer() {
   const [mounted, setMounted] = useState(false);
+  const { settings } = useProjectStore();
 
   useEffect(() => {
     setMounted(true);
@@ -148,12 +150,12 @@ export default function Footer() {
               <div className="h-[2px] w-8 bg-accent ml-3" />
             </h4>
             <div className="space-y-6 text-sm">
-              <div className="flex items-start space-x-3 group">
-                <MapPin className="text-accent shrink-0 mt-1" size={18} />
-                <p className="text-gray-400 leading-relaxed group-hover:text-white transition-colors">
-                  29, A.P.T Road, Veerappan Chatram (PO),<br />Erode – 638004
-                </p>
-              </div>
+                <div className="flex items-start space-x-3 group text-gray-400 group-hover:text-white transition-colors">
+                  <MapPin className="text-accent shrink-0 mt-1" size={18} />
+                  <p className="leading-relaxed">
+                    {settings?.address || "29, A.P.T Road, Veerappan Chatram (PO), Erode – 638004"}
+                  </p>
+                </div>
               <div className="flex items-start space-x-3 group">
                 <MapPin className="text-accent shrink-0 mt-1" size={18} />
                 <p className="text-gray-400 leading-relaxed group-hover:text-white transition-colors">
@@ -175,7 +177,7 @@ export default function Footer() {
                   <Phone className="text-accent shrink-0" size={18} />
                 </div>
                 <div className="flex flex-col">
-                  <Link href="tel:+918072524820" className="text-white font-bold hover:text-accent transition-colors">+91 80725 24820</Link>
+                  <Link href={`tel:+91${settings?.phone?.replace(/\s+/g, '')}`} className="text-white font-bold hover:text-accent transition-colors">+91 {settings?.phone || "80725 24820"}</Link>
                   <Link href="tel:+919994577514" className="text-white font-bold hover:text-accent transition-colors">+91 99945 77514</Link>
                 </div>
               </div>
@@ -183,7 +185,7 @@ export default function Footer() {
                 <div className="w-10 h-10 bg-primary-foreground/5 flex items-center justify-center border border-white/10 group-hover:border-accent transition-colors">
                   <Mail className="text-accent shrink-0" size={18} />
                 </div>
-                <Link href="mailto:kavincivil2@gmail.com" className="text-white font-bold hover:text-accent transition-colors">kavincivil2@gmail.com</Link>
+                <Link href={`mailto:${settings?.email}`} className="text-white font-bold hover:text-accent transition-colors">{settings?.email || "kavincivil2@gmail.com"}</Link>
               </div>
               <Link href="/contact" className="inline-flex items-center text-sm font-black uppercase tracking-widest text-accent hover:text-white group pt-4">
                 Request Service <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} />

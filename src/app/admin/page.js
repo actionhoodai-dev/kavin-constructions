@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, LogOut, Plus, Edit, Trash2, Settings, Image as ImageIcon, MapPin, Calendar, Clock, Lock, User, Send, CheckCircle, ChevronRight, Ruler, FileText, X, FolderOpen } from "lucide-react";
+import { LayoutDashboard, LogOut, Plus, Edit, Trash2, Settings, Image as ImageIcon, MapPin, Calendar, Clock, Lock, User, Send, CheckCircle, ChevronRight, Ruler, FileText, X, FolderOpen, Menu, ArrowLeft } from "lucide-react";
 import { useProjectStore } from "@/store/useProjectStore";
 import { cn } from "@/lib/utils";
 import { auth } from "@/lib/firebase/config";
@@ -12,6 +12,7 @@ export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
   const [showAddModal, setShowAddModal] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [addMode, setAddMode] = useState("projects"); // "projects" or "gallery"
   const [editingItem, setEditingItem] = useState(null);
   const { 
@@ -188,15 +189,40 @@ export default function AdminPage() {
       <div className="fixed inset-0 bg-blueprint-fine opacity-[0.03] pointer-events-none" />
       
       {/* Dashboard Grid */}
-      <div className="w-full max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10 relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6 lg:gap-10 relative z-10">
+         
+         {/* Mobile Menu Toggle */}
+         <div className="lg:hidden flex items-center justify-between bg-primary p-4 border-2 border-accent mb-4">
+            <div className="flex items-center space-x-3">
+               <div className="w-8 h-8 bg-accent flex items-center justify-center">
+                  <LayoutDashboard size={16} className="text-primary" />
+               </div>
+               <span className="text-white font-black uppercase tracking-widest text-xs">Admin Panel</span>
+            </div>
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="text-white p-2 border border-white/20"
+            >
+               {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+         </div>
+
          {/* Sidebar */}
-         <div className="bg-primary text-white p-8 md:p-12 flex flex-col justify-between border-4 border-accent shadow-2xl relative">
+         <div className={cn(
+            "fixed inset-0 lg:relative z-[150] lg:z-0 transform transition-transform duration-300 lg:translate-x-0 bg-primary/95 lg:bg-primary text-white p-8 md:p-12 flex flex-col justify-between border-4 border-accent shadow-2xl overflow-y-auto w-[280px] lg:w-auto",
+            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+         )}>
             <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
             
             <div className="relative">
-               <div className="mb-12">
-                  <h1 className="text-4xl font-black tracking-tighter leading-none mb-1">Kavin</h1>
-                  <p className="text-[8px] font-black uppercase tracking-[0.3em] text-accent">Control Interface</p>
+               <div className="mb-12 flex items-center justify-between">
+                  <div>
+                    <h1 className="text-4xl font-black tracking-tighter leading-none mb-1">Kavin</h1>
+                    <p className="text-[8px] font-black uppercase tracking-[0.3em] text-accent">Control Interface</p>
+                  </div>
+                  <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-gray-400">
+                    <X size={20} />
+                  </button>
                </div>
                
                <nav className="space-y-4">
@@ -208,7 +234,10 @@ export default function AdminPage() {
                   ].map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => setActiveTab(item.id)}
+                      onClick={() => {
+                        setActiveTab(item.id);
+                        setIsSidebarOpen(false);
+                      }}
                       className={cn(
                         "w-full flex items-center space-x-4 py-3 px-4 text-xs font-black uppercase tracking-widest transition-all text-left",
                         activeTab === item.id 
@@ -221,6 +250,16 @@ export default function AdminPage() {
                     </button>
                   ))}
                </nav>
+
+               <div className="mt-12 pt-10 border-t border-white/5 space-y-4">
+                  <a 
+                    href="/"
+                    className="flex items-center space-x-3 text-accent hover:text-white transition-colors text-[10px] font-black uppercase tracking-[0.2em]"
+                  >
+                    <ArrowLeft size={14} />
+                    <span>Return To Site</span>
+                  </a>
+               </div>
             </div>
             
             <button 
@@ -231,6 +270,14 @@ export default function AdminPage() {
                <span>Terminate Session</span>
             </button>
          </div>
+
+         {/* Sidebar mobile overlay background */}
+         {isSidebarOpen && (
+           <div 
+             onClick={() => setIsSidebarOpen(false)}
+             className="fixed inset-0 bg-black/60 z-[140] lg:hidden backdrop-blur-sm"
+           />
+         )}
 
          {/* Content Area */}
          <div className="flex flex-col space-y-10">

@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Ruler, Triangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { useProjectStore } from "@/store/useProjectStore";
+
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
@@ -21,6 +23,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { settings } = useProjectStore();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -140,8 +143,8 @@ export default function Navbar() {
               ))}
               <div className="pt-8 border-t border-gray-100">
                 <p className="text-xs font-bold text-secondary tracking-widest uppercase mb-4">Contact us</p>
-                <p className="text-lg font-bold text-primary">+91 80725 24820</p>
-                <p className="text-lg font-bold text-primary">kavincivil2@gmail.com</p>
+                <p className="text-lg font-bold text-primary">+91 {settings?.phone || "80725 24820"}</p>
+                <p className="text-lg font-bold text-primary">{settings?.email || "kavincivil2@gmail.com"}</p>
               </div>
             </div>
           </motion.div>

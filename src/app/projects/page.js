@@ -109,12 +109,12 @@ export default function ProjectsPage() {
                      {project.category}
                   </div>
 
-                  <div className="absolute inset-x-0 bottom-0 z-20 p-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out bg-gradient-to-t from-primary via-primary/95 to-transparent">
+                  <div className="absolute inset-x-0 bottom-0 z-20 p-6 md:p-10 transform translate-y-0 md:translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out bg-gradient-to-t from-primary via-primary/95 to-transparent">
                      <div className="flex items-center space-x-2 text-accent text-[9px] font-black uppercase tracking-[0.3em] mb-4">
                         <MapPin size={12} />
                         <span>{project.location}</span>
                      </div>
-                     <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-tight mb-8">
+                     <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter leading-tight mb-8">
                         {project.title}
                      </h3>
                      <div className="flex items-center justify-between border-t border-white/20 pt-8">

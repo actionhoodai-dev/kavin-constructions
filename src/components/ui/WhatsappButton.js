@@ -2,8 +2,12 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useProjectStore } from "@/store/useProjectStore";
 
 export default function WhatsappButton() {
+  const { settings } = useProjectStore();
+  const phone = settings?.phone?.replace(/\s+/g, '') || "8072524820";
+
   return (
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
@@ -12,7 +16,7 @@ export default function WhatsappButton() {
       className="fixed bottom-8 right-8 z-[100]"
     >
       <Link
-        href="https://wa.me/918072524820"
+        href={`https://wa.me/91${phone}`}
         target="_blank"
         rel="noopener noreferrer"
         className="relative group block"
