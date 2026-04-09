@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Mail } from "lucide-react";
+import { Phone } from "lucide-react";
 import Link from "next/link";
+import { useProjectStore } from "@/store/useProjectStore";
 
 export default function ContactBanner() {
+  const { settings } = useProjectStore();
   return (
     <section className="py-24 bg-accent relative overflow-hidden group">
       {/* Animated Blueprint Background */}
@@ -52,9 +54,9 @@ export default function ContactBanner() {
              Contact Our Team Now
            </Link>
            <div className="flex flex-col items-start justify-center space-y-1">
-              <Link href="tel:+918072524820" className="flex items-center space-x-3 text-primary hover:text-white transition-colors group/phone font-black tracking-tighter text-2xl">
+              <Link href={`tel:+91${settings?.phone?.replace(/\s+/g, '')}`} className="flex items-center space-x-3 text-primary hover:text-white transition-colors group/phone font-black tracking-tighter text-2xl">
                  <Phone size={24} className="group-hover/phone:rotate-12 transition-transform" />
-                 <span>+91 80725 24820</span>
+                 <span>+91 {settings?.phone || "80725 24820"}</span>
               </Link>
            </div>
         </motion.div>

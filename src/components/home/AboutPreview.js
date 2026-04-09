@@ -33,30 +33,17 @@ export default function AboutPreview() {
                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                  className="absolute inset-0 border border-white/5 rounded-full scale-110" 
                />
-               
-                <div className="relative z-10 text-center flex flex-col items-center">
-                   <div className="w-56 h-72 relative mb-8 overflow-hidden border-2 border-accent transition-transform duration-700 group-hover:scale-105">
-                      <img 
-                        src="/images/engineer_kavin.png" 
-                        alt="Er. R. Kavin Kumar" 
-                        className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                      />
-                      <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                   </div>
-
-                  <h3 className="text-4xl font-black tracking-tighter text-white uppercase leading-none mb-2">Er. R. KAVIN KUMAR</h3>
-                  <p className="text-accent font-black uppercase tracking-[0.3em] text-sm mb-8">DCE., B.E. | Licensed Surveyor</p>
-                  <div className="flex space-x-6">
-                    <div className="bg-white/10 px-4 py-3 text-center border border-white/5 backdrop-blur-sm">
-                       <span className="block text-2xl font-black text-white">10+</span>
-                       <span className="block text-[8px] font-bold text-accent uppercase tracking-widest">Years Experience</span>
+                               <div className="relative z-10 text-center flex flex-col items-center">
+                    <div className="w-64 h-64 relative bg-white flex items-center justify-center p-8 border-2 border-accent shadow-2xl transition-transform duration-700 group-hover:scale-105">
+                       <Image 
+                         src="/images/kcs-logo.png" 
+                         alt="KAVIN CONSTRUCTIONS & SURVEYORS" 
+                         fill
+                         unoptimized={true}
+                         className="object-contain p-8"
+                       />
                     </div>
-                    <div className="bg-white/10 px-4 py-3 text-center border border-white/5 backdrop-blur-sm">
-                       <span className="block text-2xl font-black text-white">500+</span>
-                       <span className="block text-[8px] font-bold text-accent uppercase tracking-widest">Surveys Completed</span>
-                    </div>
-                  </div>
-               </div>
+                </div>
 
                {/* Geometric Corner Accents */}
                <div className="absolute top-0 right-0 w-24 h-24 border-t-4 border-r-4 border-accent" />

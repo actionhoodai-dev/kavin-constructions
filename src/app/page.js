@@ -4,6 +4,7 @@ import Hero from "@/components/home/Hero";
 import ServicesPreview from "@/components/home/ServicesPreview";
 import AboutPreview from "@/components/home/AboutPreview";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
+import Testimonials from "@/components/home/Testimonials";
 import StatsSection from "@/components/home/StatsSection";
 import ContactBanner from "@/components/home/ContactBanner";
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -29,6 +30,7 @@ export default function Home() {
       <AboutPreview />
       <StatsSection />
       <FeaturedProjects />
+      <Testimonials />
       <ContactBanner />
     </div>
   );
