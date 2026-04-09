@@ -17,6 +17,7 @@ export default function AdminPage() {
 
   // Form state
   const [formData, setFormData] = useState({ title: "", category: "Surveying", location: "", image: "", description: "" });
+  const [isUploading, setIsUploading] = useState(false);
 
   // Login State
   const [email, setEmail] = useState("");
@@ -475,18 +476,36 @@ export default function AdminPage() {
                         <input 
                           type="file"
                           accept="image/*"
-                          className="w-full bg-gray-50 border-2 border-gray-100 py-3 px-4 font-bold text-sm tracking-widest focus:outline-none focus:border-accent file:mr-4 file:py-2 file:px-4 file:border-0 file:text-[10px] file:font-black file:uppercase file:tracking-widest file:bg-primary file:text-white hover:file:bg-accent hover:file:text-primary cursor-pointer transition-all" 
-                          onChange={(e) => {
+                          disabled={isUploading}
+                          className="w-full bg-gray-50 border-2 border-gray-100 py-3 px-4 font-bold text-sm tracking-widest focus:outline-none focus:border-accent file:mr-4 file:py-2 file:px-4 file:border-0 file:text-[10px] file:font-black file:uppercase file:tracking-widest file:bg-primary file:text-white hover:file:bg-accent hover:file:text-primary cursor-pointer transition-all disabled:opacity-50" 
+                          onChange={async (e) => {
                              const file = e.target.files?.[0];
                              if (file) {
-                                const reader = new FileReader();
-                                reader.onloadend = () => {
-                                   setFormData({...formData, image: reader.result});
-                                };
-                                reader.readAsDataURL(file);
+                                setIsUploading(true);
+                                const uploadData = new FormData();
+                                uploadData.append('file', file);
+                                
+                                try {
+                                  const res = await fetch('/api/upload', {
+                                    method: 'POST',
+                                    body: uploadData,
+                                  });
+                                  const data = await res.json();
+                                  if (data.secure_url) {
+                                     setFormData({...formData, image: data.secure_url});
+                                  } else {
+                                     alert("Upload failed: " + data.error);
+                                  }
+                                } catch (error) {
+                                  alert("Upload error: " + error.message);
+                                } finally {
+                                  setIsUploading(false);
+                                }
                              }
                           }}
                         />
+                        {isUploading && <p className="text-accent text-[10px] font-black uppercase tracking-widest mt-2 block">Uploading to Cloudinary...</p>}
+                        {formData.image && !isUploading && <p className="text-green-500 text-[10px] font-black uppercase tracking-widest mt-2 block">Image Uploaded Successfully!</p>}
                      </div>
                      {addMode === "projects" && (
                        <div className="space-y-2">
