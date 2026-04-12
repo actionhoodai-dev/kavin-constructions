@@ -40,27 +40,49 @@ function Counter({ value, duration = 2 }) {
 
 export default function StatsSection() {
   return (
-    <section className="py-20 bg-primary text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-blueprint-fine opacity-10" />
+    <section className="py-40 bg-transparent relative overflow-hidden">
+      {/* 3D Technical Background Foundations */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-blueprint-fine opacity-10 pointer-events-none" />
+        <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-[150px] animate-pulse" />
+      </div>
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, i) => (
-             <motion.div
-               key={i}
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ delay: i * 0.1 }}
-               className="group"
-             >
-                <div className="mx-auto w-16 h-16 border-2 border-accent/20 border-t-accent flex items-center justify-center mb-6 group-hover:rotate-45 transition-transform duration-500">
-                   <stat.icon className="text-accent -rotate-45 group-hover:rotate-0 transition-transform duration-500" size={24} />
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              animate={{ 
+                y: i % 2 === 0 ? [0, 10, 0] : [0, -10, 0]
+              }}
+              transition={{ 
+                duration: 8 + i, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: i * 0.1
+              }}
+              viewport={{ once: true }}
+              className="glass-frosted p-10 md:p-12 rounded-[4rem] border-white/5 flex flex-col items-center text-center space-y-8 shadow-2xl relative group hover:border-accent/40 transition-all"
+            >
+              {/* HUD Element */}
+              <div className="absolute top-8 right-8 w-8 h-8 border-t border-r border-accent/20 select-none opacity-40" />
+
+              <div className="w-16 h-16 rounded-2xl glass-frosted border-accent/20 flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:scale-110 transition-all duration-700">
+                <stat.icon className="text-accent group-hover:text-primary transition-colors" size={28} />
+              </div>
+              
+              <div className="space-y-4">
+                <div className="text-5xl md:text-7xl font-black text-white tracking-tighter tabular-nums drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                  <Counter value={stat.value} />{stat.suffix}
                 </div>
-                <div className="text-4xl md:text-6xl font-black tracking-tighter mb-2 tabular-nums">
-                   <Counter value={stat.value} />{stat.suffix}
-                </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-accent/70">{stat.label}</p>
-             </motion.div>
+                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40 group-hover:text-white/80 transition-colors">{stat.label}</p>
+              </div>
+
+              {/* Kinetic Glow Base */}
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-32 h-32 bg-accent/10 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.div>
           ))}
         </div>
       </div>

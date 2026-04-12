@@ -47,24 +47,41 @@ const extendedServices = [
 
 export default function ServicesPage() {
   return (
-    <div className="bg-white min-h-screen pt-32 pb-24 overflow-hidden relative">
-      <div className="fixed inset-0 bg-blueprint opacity-[0.02] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 origin-top-right pointer-events-none" />
-      
+    <div className="bg-transparent min-h-screen pt-32 pb-24 overflow-hidden relative selection:bg-accent selection:text-primary">
+      {/* 3D Architectural Background Atmosphere */}
+      <div className="fixed inset-0 z-0">
+        <Image 
+          src="/images/high_tech_surveying.png"
+          alt="High Tech Surveying"
+          fill
+          unoptimized={true}
+          className="object-cover opacity-10 brightness-50 mix-blend-overlay scale-125 blur-[1px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+      </div>
+
       <div className="container mx-auto px-4 md:px-6 relative z-10 text-center flex flex-col items-center">
         <motion.div
-           initial={{ opacity: 0, scale: 0.95 }}
+           initial={{ opacity: 0, scale: 0.9 }}
            animate={{ opacity: 1, scale: 1 }}
-           className="w-20 h-2 bg-accent mb-12 flex items-center justify-center"
+           className="w-24 h-[1px] bg-accent mb-12 shadow-[0_0_20px_rgba(251,191,36,0.5)]"
         />
-        <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-primary uppercase leading-tight mb-8">
-           Technical <span className="text-accent underline decoration-primary/10">Service</span> Portfolio
-        </h1>
-        <p className="text-secondary max-w-2xl text-xl font-medium leading-relaxed mb-20 italic">
+        <motion.h1 
+           initial={{ opacity: 0, y: 30 }}
+           animate={{ opacity: 1, y: 0 }}
+           className="text-fluid-lg font-black tracking-tighter text-white uppercase leading-none mb-10"
+        >
+           Technical <span className="text-accent">Service</span> <br/> Architecture
+        </motion.h1>
+        <motion.p 
+           animate={{ y: [0, -5, 0] }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+           className="text-white/50 max-w-2xl text-xl font-black uppercase tracking-tighter leading-relaxed mb-24"
+        >
            Engineering structural accuracy and architectural vision through professional surveying and construction expertise.
-        </p>
+        </motion.p>
 
-        <div className="grid grid-cols-1 gap-32 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 gap-40 max-w-6xl mx-auto">
            {extendedServices.map((service, index) => {
              const Icon = iconMap[service.icon] || Ruler;
              const isEven = index % 2 === 1;
@@ -76,101 +93,108 @@ export default function ServicesPage() {
                  initial={{ opacity: 0, y: 50 }}
                  whileInView={{ opacity: 1, y: 0 }}
                  viewport={{ once: true, margin: "-100px" }}
-                 transition={{ duration: 0.8 }}
                  className={cn(
-                   "flex flex-col lg:flex-row gap-20 items-center justify-between",
+                   "flex flex-col lg:flex-row gap-16 items-center justify-between",
                    isEven ? "lg:flex-row-reverse" : ""
                  )}
                >
-                 {/* Visual Side */}
-                 <div className="flex-1 w-full relative">
-                    <div className={cn(
-                      "aspect-video bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden relative group",
-                      service.main ? "bg-primary border-primary shadow-[20px_20px_0px_0px_#FBBF24]" : "hover:border-accent shadow-xl group hover:shadow-2xl transition-all"
-                    )}>
+                 {/* Visual Side with Parallax */}
+                 <div className="flex-1 w-full relative group">
+                    <motion.div 
+                      whileHover={{ scale: 1.02 }}
+                      className="aspect-video glass-frosted overflow-hidden relative rounded-[3rem] border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
+                    >
                        {/* Service Image Background */}
                        {serviceImages[service.id] && (
-                        <div className="absolute inset-0 z-0">
+                        <motion.div 
+                          className="absolute inset-0 z-0"
+                          style={{ y: index % 2 === 0 ? 20 : -20 }}
+                          whileInView={{ y: index % 2 === 0 ? -20 : 20 }}
+                          transition={{ duration: 2, ease: "easeOut" }}
+                        >
                            <Image 
                               src={serviceImages[service.id]} 
                               alt={service.title} 
                               fill
                               unoptimized={true}
-                              className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                              className="object-cover brightness-50 contrast-125 transition-transform duration-1000 group-hover:scale-110"
                            />
-                        </div>
+                        </motion.div>
                        )}
 
+                       <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
                        
-                       <div className="absolute inset-0 bg-blueprint opacity-5 pointer-events-none" />
-                       <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent pointer-events-none" />
-                       
-                       <div className="absolute inset-10 border border-white/10 opacity-30 z-20 pointer-events-none" />
-                       
-                       {/* Animated Lines Decoration */}
-                       <motion.div 
-                          animate={{ x: ["-100%", "200%"] }} 
-                          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                          className="absolute bottom-10 left-0 w-32 h-[1px] bg-accent/30 pointer-events-none z-40" 
-                       />
-                       <motion.div 
-                          animate={{ y: ["-100%", "200%"] }} 
-                          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                          className="absolute top-0 right-10 w-[1px] h-32 bg-primary/20 pointer-events-none z-40" 
-                       />
-                    </div>
-
+                       {/* HUD Decoration */}
+                       <div className="absolute top-10 left-10 w-20 h-20 border-t border-l border-accent/40 opacity-50 select-none pointer-events-none" />
+                       <div className="absolute bottom-10 right-10 w-20 h-20 border-b border-r border-accent/40 opacity-50 select-none pointer-events-none" />
+                    </motion.div>
                  </div>
 
 
-                 {/* Content Side */}
-                 <div className="flex-1 space-y-8 text-left">
-                    <div className="flex items-center space-x-6">
-                       <span className="text-accent font-black text-6xl opacity-20 select-none tracking-tighter">0{index + 1}</span>
-                       <div className="h-1 flex-grow bg-gray-100" />
+                 {/* Content Side - Glass Card */}
+                 <motion.div 
+                    animate={{ y: [0, index % 2 === 0 ? 10 : -10, 0] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex-1 space-y-10 text-left glass-frosted p-12 md:p-16 rounded-[4rem] border-white/5"
+                 >
+                    <div className="flex items-center space-x-8">
+                       <span className="text-accent font-black text-7xl opacity-10 select-none tracking-tighter leading-none">0{index + 1}</span>
+                       <div className="h-[1px] flex-grow bg-white/10" />
+                       <div className="w-12 h-12 glass-frosted flex items-center justify-center rounded-2xl border-accent/20">
+                          <Icon className="text-accent" size={24} />
+                       </div>
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-black text-primary uppercase tracking-tighter leading-tight">{service.title}</h2>
-                    <p className="text-gray-600 text-lg leading-relaxed font-medium">
+
+                    <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.9]">{service.title}</h2>
+                    <p className="text-white/40 text-lg leading-relaxed font-medium">
                        {service.description}
                     </p>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                        {service.features.map(f => (
-                         <div key={f} className="flex items-center space-x-3 group">
-                            <div className="w-10 h-10 flex items-center justify-center bg-gray-50 group-hover:bg-accent group-hover:text-primary transition-all rounded-full">
-                               <CheckCircle size={18} className="text-primary group-hover:text-white" />
-                            </div>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-secondary group-hover:text-primary transition-colors">{f}</span>
+                         <div key={f} className="flex items-center space-x-4 group bg-white/5 p-4 rounded-2xl border border-white/5 hover:border-accent/30 transition-all">
+                            <CheckCircle size={18} className="text-accent shrink-0" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">{f}</span>
                          </div>
                        ))}
                     </div>
-                    <Link href="/contact" className="bg-primary text-white inline-flex items-center px-10 py-5 text-sm font-black uppercase tracking-widest hover:bg-charcoal transition-all shadow-[6px_6px_0px_0px_#FBBF24] group">
-                       Book This Service <ArrowRight className="ml-3 transition-transform group-hover:translate-x-2" size={18} />
-                    </Link>
-                 </div>
+
+                    <div className="pt-6">
+                      <Link href="/contact" className="glass-frosted text-white inline-flex items-center px-12 py-6 text-[11px] font-black uppercase tracking-widest hover:bg-accent hover:text-primary transition-all shadow-[0_30px_60px_rgba(251,191,36,0.1)] group rounded-full">
+                         Engineering Consult <ArrowRight className="ml-4 transition-transform group-hover:translate-x-2" size={18} />
+                      </Link>
+                    </div>
+                 </motion.div>
                </motion.div>
              );
            })}
         </div>
 
-        {/* Technical Capabilities Section */}
-        <div className="mt-40 bg-gray-50 p-12 md:p-24 border-2 border-gray-100 relative group overflow-hidden">
-           <div className="absolute inset-0 bg-blueprint-fine opacity-20 pointer-events-none" />
+        {/* Technical Capabilities Section - Immersive Glass Panel */}
+        <motion.div 
+           initial={{ opacity: 0, scale: 0.95 }}
+           whileInView={{ opacity: 1, scale: 1 }}
+           className="mt-60 glass-frosted p-12 md:p-24 rounded-[5rem] border-accent/20 relative group overflow-hidden shadow-[0_0_150px_-30px_rgba(251,191,36,0.1)]"
+        >
+           <div className="absolute inset-0 bg-blueprint-fine opacity-5 pointer-events-none" />
            <div className="relative z-10 text-center flex flex-col items-center">
-              <Gauge size={64} className="text-accent mb-8 group-hover:rotate-[20deg] transition-transform" />
-              <h2 className="text-4xl md:text-6xl font-black text-primary uppercase tracking-tighter mb-8 leading-tight">Elite <span className="text-accent decoration-primary/5 line-through decoration-thickness-4">Instrumentation</span> Standards</h2>
-              <p className="text-gray-500 font-black uppercase tracking-[0.3em] text-sm mb-12 max-w-4xl">
+              <div className="w-24 h-24 glass-frosted rounded-full flex items-center justify-center border-accent/40 mb-10 group-hover:rotate-12 transition-transform duration-700 shadow-[0_0_50px_rgba(251,191,36,0.2)]">
+                <Gauge size={48} className="text-accent" />
+              </div>
+              <h2 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-10 leading-[0.85]">Elite <br/><span className="text-accent">Technical</span> Standards</h2>
+              <p className="text-white/40 font-black uppercase tracking-[0.5em] text-xs mb-16 max-w-4xl leading-relaxed">
                  We leverage advanced GPS mapping technology, total station instruments, and high-precision structural health software to ensure millimeter accuracy in every surveying project.
               </p>
-              <div className="flex flex-wrap justify-center gap-10">
+              <div className="flex flex-wrap justify-center gap-8">
                  {["GPS Accuracy", "3D Modeling", "Structural Audits", "Vastu Synergy"].map(tag => (
-                   <div key={tag} className="flex items-center space-x-3 text-primary font-black uppercase tracking-widest text-xs">
-                      <div className="w-4 h-4 bg-accent" />
+                   <div key={tag} className="glass-frosted border-white/10 px-8 py-4 rounded-full flex items-center space-x-4 text-white font-black uppercase tracking-[0.3em] text-[10px] shadow-xl group/tag hover:border-accent transition-colors">
+                      <div className="w-3 h-3 bg-accent animate-pulse shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
                       <span>{tag}</span>
                    </div>
                  ))}
               </div>
            </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

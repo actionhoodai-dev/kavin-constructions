@@ -56,74 +56,40 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-primary text-white overflow-hidden pt-20 pb-10">
-      {/* Animated Triangular Pattern Background */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        {mounted && [...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0.1, rotate: 0 }}
-            animate={{ 
-              opacity: [0.1, 0.3, 0.1],
-              rotate: [0, 45, 0],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{ 
-              duration: 10 + i * 2, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-            className="absolute"
-            style={{
-              top: `${(i * 17) % 100}%`,
-              left: `${(i * 23) % 100}%`,
-              width: "300px",
-              height: "300px",
-              border: "1px solid #FBBF24",
-              clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-            }}
-          />
-        ))}
-        {/* Blueprint Lines */}
-        <div className="absolute inset-0 bg-blueprint-fine opacity-20" />
-      </div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand Info */}
-          <div className="space-y-6">
-            <Link href="/" className="flex items-center group">
-              <div className="relative h-16 w-16 bg-white p-1 rounded-sm shadow-xl flex items-center justify-center overflow-hidden">
+    <footer className="relative bg-slate-950 text-white overflow-hidden pt-32 pb-16 selection:bg-accent selection:text-primary border-t border-white/5">
+      <div className="container mx-auto px-6 md:px-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+          {/* Brand Identity */}
+          <div className="space-y-8">
+            <Link href="/" className="flex flex-col group">
+              <div className="relative h-16 w-16 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden transition-all group-hover:bg-white/10 mb-6">
                 <Image 
                   src="/images/kcs-logo.png" 
-                  alt="KAVIN CONSTRUCTIONS AND SURVEYORS"
+                  alt="KCS Logo"
                   fill
                   unoptimized={true}
-                  className="object-contain p-1"
+                  className="object-contain p-2 brightness-200 contrast-150"
                 />
               </div>
 
-              <div className="ml-4 flex flex-col">
-                <span className="text-3xl font-black tracking-tighter leading-none text-white">KAVIN</span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent leading-none">CONSTRUCTIONS & SURVEYORS</span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-black tracking-tighter leading-none text-white">KAVIN</span>
+                <span className="text-[7px] font-black uppercase tracking-[0.4em] text-accent leading-none mt-2">CONSTRUCTIONS & SURVEYORS</span>
               </div>
-
             </Link>
 
-
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-              Precision land surveying and elite civil construction services. 
-              Engineering structural excellence with geometric accuracy.
+            <p className="text-white/30 text-xs font-medium leading-relaxed max-w-xs uppercase tracking-widest">
+              Elite engineering firm specializing in high-precision surveying and architectural construction.
             </p>
 
-            <div className="flex space-x-4">
+            <div className="flex gap-4">
               {socialLinks.map((social) => (
                 <Link 
                   key={social.name} 
                   href={social.href} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 border border-gray-700 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-primary transition-all rounded shadow-md" 
+                  className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-primary transition-all rounded-lg" 
                   title={social.name}
                 >
                   {social.icon}
@@ -132,17 +98,14 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-black uppercase tracking-tighter mb-8 flex items-center">
-              Our Services
-              <div className="h-[2px] w-8 bg-accent ml-3" />
-            </h4>
+          {/* Sectors */}
+          <div className="space-y-8">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-accent">Active Sectors</h4>
             <ul className="space-y-4">
               {services.map((service) => (
                 <li key={service.name}>
-                  <Link href={service.href} className="text-gray-400 hover:text-accent flex items-center group text-sm font-medium transition-colors">
-                    <span className="w-1.5 h-1.5 bg-gray-600 group-hover:bg-accent mr-3 transition-colors" />
+                  <Link href={service.href} className="text-white/40 hover:text-white flex items-center group text-[9px] font-black uppercase tracking-[0.2em] transition-all">
+                    <span className="w-1.5 h-[1.5px] bg-white/10 group-hover:bg-accent group-hover:w-3 mr-3 transition-all" />
                     {service.name}
                   </Link>
                 </li>
@@ -150,62 +113,50 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Addresses */}
-          <div>
-            <h4 className="text-lg font-black uppercase tracking-tighter mb-8 flex items-center">
-              Office Locations
-              <div className="h-[2px] w-8 bg-accent ml-3" />
-            </h4>
-            <div className="space-y-6 text-sm">
-                <div className="flex items-start space-x-3 group text-gray-400 group-hover:text-white transition-colors">
-                  <MapPin className="text-accent shrink-0 mt-1" size={18} />
-                  <p className="leading-relaxed">
-                    {settings?.address || "29, A.P.T Road, Veerappan Chatram (PO), Erode – 638004"}
+          {/* Locations */}
+          <div className="space-y-8">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-accent">Strategic Hubs</h4>
+            <div className="space-y-8">
+                <div className="flex items-start space-x-4 group">
+                  <MapPin className="text-accent shrink-0 mt-1" size={16} />
+                  <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+                    {settings?.address || "29, A.P.T Road, Veerappan Chatram, Erode – 638004"}
                   </p>
                 </div>
-              <div className="flex items-start space-x-3 group">
-                <MapPin className="text-accent shrink-0 mt-1" size={18} />
-                <p className="text-gray-400 leading-relaxed group-hover:text-white transition-colors">
-                  Fire Service 106, Gandhiji Rd, Periyar Nagar,<br />Erode, TN – 638001
-                </p>
-              </div>
+                <div className="flex items-start space-x-4 group">
+                  <MapPin className="text-accent shrink-0 mt-1" size={16} />
+                  <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+                    Fire Service 106, Gandhiji Rd, Periyar Nagar, Erode – 638001
+                  </p>
+                </div>
             </div>
           </div>
 
-          {/* Contact Details */}
-          <div>
-            <h4 className="text-lg font-black uppercase tracking-tighter mb-8 flex items-center">
-              Get In Touch
-              <div className="h-[2px] w-8 bg-accent ml-3" />
-            </h4>
+          {/* Terminals */}
+          <div className="space-y-8">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-accent">Data Terminals</h4>
             <div className="space-y-6">
-              <div className="flex items-center space-x-3 group">
-                <div className="w-10 h-10 bg-primary-foreground/5 flex items-center justify-center border border-white/10 group-hover:border-accent transition-colors">
-                  <Phone className="text-accent shrink-0" size={18} />
-                </div>
+              <div className="flex items-center space-x-4">
+                <Phone className="text-accent" size={16} />
                 <div className="flex flex-col">
-                  <Link href={`tel:+91${settings?.phone?.replace(/\s+/g, '')}`} className="text-white font-bold hover:text-accent transition-colors">+91 {settings?.phone || "80725 24820"}</Link>
-                  <Link href="tel:+919994577514" className="text-white font-bold hover:text-accent transition-colors">+91 99945 77514</Link>
+                  <Link href={`tel:+91${settings?.phone?.replace(/\s+/g, '')}`} className="text-white font-black tracking-tighter text-lg hover:text-accent transition-colors">+91 {settings?.phone || "80725 24820"}</Link>
+                  <Link href="tel:+919994577514" className="text-white/30 font-bold text-[10px] tracking-widest">+91 99945 77514</Link>
                 </div>
               </div>
-              <div className="flex items-center space-x-3 group">
-                <div className="w-10 h-10 bg-primary-foreground/5 flex items-center justify-center border border-white/10 group-hover:border-accent transition-colors">
-                  <Mail className="text-accent shrink-0" size={18} />
-                </div>
-                <Link href={`mailto:${settings?.email}`} className="text-white font-bold hover:text-accent transition-colors">{settings?.email || "kavincivil2@gmail.com"}</Link>
+              <div className="flex items-center space-x-4">
+                <Mail className="text-accent" size={16} />
+                <Link href={`mailto:${settings?.email}`} className="text-white/40 font-bold tracking-widest text-[9px] uppercase hover:text-white transition-all">{settings?.email || "kavincivil2@gmail.com"}</Link>
               </div>
-              <Link href="/contact" className="inline-flex items-center text-sm font-black uppercase tracking-widest text-accent hover:text-white group pt-4">
-                Request Service <ArrowUpRight className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} />
-              </Link>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-bold uppercase tracking-[0.2em]">
-          <p>© {new Date().getFullYear()} Kavin Constructions and Surveyors.</p>
-
-          <p className="mt-4 md:mt-0">Precision | Geometry | Structural Excellence</p>
+        {/* Cyber Ribbon */}
+        <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center text-[7px] text-white/20 font-black uppercase tracking-[0.5em] text-center gap-6">
+          <p>© {new Date().getFullYear()} Kavin Constructions & Surveyors. System Protocol v4.2</p>
+          <div className="flex items-center space-x-6">
+            <span>Precision | Geometry | Structural Excellence</span>
+          </div>
         </div>
       </div>
     </footer>

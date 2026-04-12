@@ -7,233 +7,278 @@ import { useForm } from "react-hook-form";
 import { useProjectStore } from "@/store/useProjectStore";
 import { cn } from "@/lib/utils";
 
+import Image from "next/image";
+
 export default function ContactPage() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
   const [isSuccess, setIsSuccess] = useState(false);
   const { settings } = useProjectStore();
 
   const onSubmit = async (data) => {
-    // Mock submission
-    console.log("Form Data:", data);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    console.log("Transmission Data Initialized:", data);
+    await new Promise(resolve => setTimeout(resolve, 2500));
     setIsSuccess(true);
     reset();
     setTimeout(() => setIsSuccess(false), 5000);
   };
 
+  const errorClass = "text-[8px] font-black uppercase tracking-[0.3em] text-red-500 mt-3 ml-4 animate-pulse";
+
   return (
-    <div className="bg-white min-h-screen pt-32 pb-24 overflow-hidden relative">
-      {/* Background Architectural Overlay */}
-      <div className="fixed inset-0 bg-blueprint opacity-[0.03] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 origin-top-right pointer-events-none" />
-      
+    <div className="bg-transparent min-h-screen pt-32 pb-24 overflow-hidden relative selection:bg-accent selection:text-primary">
+      {/* 3D DGPS Site Map Foundation */}
+      <div className="fixed inset-0 z-0">
+        <Image 
+          src="/images/high_tech_surveying.png"
+          alt="Site Map DGPS"
+          fill
+          unoptimized={true}
+          className="object-cover opacity-10 brightness-50 mix-blend-overlay scale-125"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+      </div>
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-4xl mb-24">
+        {/* Kinetic Header Section */}
+        <div className="max-w-4xl mb-32">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center space-x-4 mb-4"
+            className="flex items-center space-x-6 mb-8"
           >
-            <div className="w-12 h-[2px] bg-accent" />
-            <span className="text-secondary font-black uppercase tracking-[0.4em] text-sm">Direct Professional Access</span>
+            <div className="w-20 h-[1px] bg-accent" />
+            <span className="text-accent font-black uppercase tracking-[0.5em] text-[10px] md:text-xs">Direct Professional Access</span>
           </motion.div>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-primary uppercase leading-tight">
-             Connect To <span className="text-accent underline decoration-primary/5">Expert</span> Support
-          </h1>
-          <p className="text-secondary max-w-2xl text-xl font-medium leading-relaxed mt-8 italic">
-             Precise communication is the foundation of every successful engineering project. Reach out for consultations or price quotes.
-          </p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-fluid-lg font-black tracking-tighter text-white uppercase leading-[0.85] mb-12"
+          >
+             Connect To <br/><span className="text-accent">Expert</span> Support
+          </motion.h1>
+          <motion.p 
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="text-white/40 max-w-2xl text-xl font-black uppercase tracking-tighter leading-relaxed italic"
+          >
+             Precise communication is the foundation of every successful engineering project. Reach out for consultations or architectural data.
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          {/* Form Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-stretch">
+          {/* Form Side - Glass Pulse Card */}
           <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             animate={{ opacity: 1, scale: 1 }}
-             transition={{ duration: 0.8 }}
-             className="relative bg-white border-2 border-gray-100 p-10 md:p-16 shadow-2xl relative group"
+             initial={{ opacity: 0, y: 50 }}
+             animate={{ 
+               opacity: 1, 
+               y: [0, 15, 0] 
+             }}
+             transition={{ 
+               duration: 10,
+               repeat: Infinity,
+               ease: "easeInOut"
+             }}
+             className="glass-frosted p-12 md:p-20 rounded-[5rem] border-white/5 relative group shadow-[0_50px_150px_-30px_rgba(0,0,0,0.5)]"
           >
-             <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 border-accent transition-all group-hover:scale-125" />
-             <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-accent transition-all group-hover:scale-125" />
-             <div className="absolute inset-0 bg-blueprint opacity-[0.01] pointer-events-none" />
+             <div className="absolute top-12 left-12 w-16 h-16 border-t-2 border-l-2 border-accent/30 opacity-50" />
+             <div className="absolute bottom-12 right-12 w-16 h-16 border-b-2 border-r-2 border-accent/30 opacity-50" />
              
-             <h2 className="text-3xl font-black text-primary uppercase tracking-tighter mb-10 border-b border-gray-100 pb-6 flex items-center">
+             <AnimatePresence>
+               {isSuccess && (
+                 <motion.div 
+                   initial={{ opacity: 0, scale: 0.9 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   exit={{ opacity: 0, scale: 0.9 }}
+                   className="absolute inset-0 z-[100] glass-frosted m-12 rounded-[4rem] border-accent/40 flex flex-col items-center justify-center text-center p-12 backdrop-blur-3xl"
+                 >
+                    <div className="w-24 h-24 bg-accent rounded-full flex items-center justify-center mb-10 shadow-[0_0_50px_rgba(251,191,36,0.5)]">
+                       <Send className="text-primary text-4xl" />
+                    </div>
+                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4">Transmission Success</h3>
+                    <p className="text-white/40 text-[10px] font-black uppercase tracking-widest leading-relaxed">Structural specifications received. Synchronization in progress.</p>
+                 </motion.div>
+               )}
+             </AnimatePresence>
+
+             <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-12 flex items-center">
                 Send Precision Request
-                <Send size={20} className="ml-4 text-accent transition-transform group-hover:translate-x-2 group-hover:-translate-y-2" />
+                <div className="w-12 h-12 glass-frosted rounded-full ml-6 flex items-center justify-center border-accent/20">
+                   <Send size={18} className="text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </div>
              </h2>
 
-             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                   {/* Full Name */}
-                   <div className="relative group/field">
-                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary mb-2 block group-focus-within/field:text-accent transition-colors">Full Professional Name</label>
+             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10 focus-within:z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                   <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-[0.4em] text-accent/60 ml-4">Full Identity</label>
                       <div className="relative">
-                         <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                          <input 
-                            {...register("name", { required: true })}
-                            className="w-full bg-gray-50 border-2 border-gray-100 py-4 pl-12 pr-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all"
-                            placeholder="John Doe"
+                            {...register("name", { 
+                               required: "Identity is mandatory",
+                               minLength: { value: 3, message: "Identity too short" }
+                            })}
+                            className={cn(
+                                "w-full glass-frosted border-white/5 py-5 px-8 rounded-3xl text-white font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all placeholder:text-white/20",
+                                errors.name && "border-red-500/50 bg-red-500/5"
+                            )}
+                            placeholder="Engineering Representative"
                          />
-                         {errors.name && <span className="absolute -bottom-6 left-0 text-[10px] text-red-500 font-bold uppercase tracking-widest">Entry Required</span>}
+                         {errors.name && <p className={errorClass}>{errors.name.message}</p>}
                       </div>
                    </div>
 
-                   {/* Phone Number */}
-                   <div className="relative group/field">
-                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary mb-2 block group-focus-within/field:text-accent transition-colors">Contact Phone Number</label>
+                   <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-[0.4em] text-accent/60 ml-4">Terminal Phone</label>
                       <div className="relative">
-                         <Smartphone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                          <input 
-                            {...register("phone", { required: true })}
-                            className="w-full bg-gray-50 border-2 border-gray-100 py-4 pl-12 pr-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all"
-                            placeholder="+91 XXXXX XXXXX"
+                            {...register("phone", { 
+                               required: "Communication channel required",
+                               pattern: {
+                                 value: /^[0-9]{10}$/,
+                                 message: "Invalid 10-digit sequence"
+                               }
+                            })}
+                            className={cn(
+                                "w-full glass-frosted border-white/5 py-5 px-8 rounded-3xl text-white font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all placeholder:text-white/20",
+                                errors.phone && "border-red-500/50 bg-red-500/5"
+                            )}
+                            placeholder="10-Digit Terminal Number"
                          />
-                         {errors.phone && <span className="absolute -bottom-6 left-0 text-[10px] text-red-500 font-bold uppercase tracking-widest">Entry Required</span>}
+                         {errors.phone && <p className={errorClass}>{errors.phone.message}</p>}
                       </div>
                    </div>
                 </div>
 
-                {/* Email Address */}
-                <div className="relative group/field">
-                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary mb-2 block group-focus-within/field:text-accent transition-colors">Official Email Address</label>
+                <div className="space-y-3">
+                   <label className="text-[10px] font-black uppercase tracking-[0.4em] text-accent/60 ml-4">Cloud Email Access</label>
                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                       <input 
-                         {...register("email", { required: true })}
+                         {...register("email", { 
+                            required: "Neural link required",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "Invalid data protocol address"
+                            }
+                         })}
                          type="email"
-                         className="w-full bg-gray-50 border-2 border-gray-100 py-4 pl-12 pr-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all"
-                         placeholder="professional@example.com"
+                         className={cn(
+                             "w-full glass-frosted border-white/5 py-5 px-8 rounded-3xl text-white font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all placeholder:text-white/20",
+                             errors.email && "border-red-500/50 bg-red-500/5"
+                         )}
+                         placeholder="professional@structural-core.com"
                       />
-                      {errors.email && <span className="absolute -bottom-6 left-0 text-[10px] text-red-500 font-bold uppercase tracking-widest">Valid Entry Required</span>}
+                      {errors.email && <p className={errorClass}>{errors.email.message}</p>}
                    </div>
                 </div>
 
-                {/* Message */}
-                <div className="relative group/field">
-                   <label className="text-[10px] font-black uppercase tracking-[0.2em] text-secondary mb-2 block group-focus-within/field:text-accent transition-colors">Structural Detail Requirement</label>
+                <div className="space-y-3">
+                   <label className="text-[10px] font-black uppercase tracking-[0.4em] text-accent/60 ml-4">Structural Specification</label>
                    <div className="relative">
-                      <MessageSquare className="absolute left-4 top-4 text-gray-400" size={18} />
                       <textarea 
-                         {...register("message", { required: true })}
-                         className="w-full bg-gray-50 border-2 border-gray-100 py-4 pl-12 pr-6 font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all min-h-[150px]"
-                         placeholder="Describe your surveying or construction requirement in detail..."
+                         {...register("message", { 
+                            required: "Specifications required",
+                            minLength: { value: 10, message: "Provide more technical detail" }
+                         })}
+                         className={cn(
+                             "w-full glass-frosted border-white/5 py-6 px-8 rounded-[2rem] text-white font-bold text-sm tracking-widest focus:outline-none focus:border-accent transition-all min-h-[180px] placeholder:text-white/20",
+                             errors.message && "border-red-500/50 bg-red-500/5"
+                         )}
+                         placeholder="Describe your architectural or surveying requirement..."
                       />
-                      {errors.message && <span className="absolute -bottom-6 left-0 text-[10px] text-red-500 font-bold uppercase tracking-widest">Specification Required</span>}
+                      {errors.message && <p className={errorClass}>{errors.message.message}</p>}
                    </div>
                 </div>
 
                 <button 
                    type="submit"
                    disabled={isSubmitting}
-                   className={cn(
-                     "w-full bg-primary text-white py-6 text-sm font-black uppercase tracking-[0.3em] transition-all relative overflow-hidden group",
-                     isSubmitting ? "opacity-70 cursor-not-allowed" : "hover:bg-charcoal shadow-[8px_8px_0px_0px_#FBBF24]"
-                   )}
+                   className="w-full glass-frosted border-accent/20 text-accent hover:bg-accent hover:text-primary py-6 px-10 rounded-full text-xs font-black uppercase tracking-[0.5em] transition-all shadow-2xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                   {isSubmitting ? "Transmitting Data..." : "Transmit Requirement"}
-                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
+                   {isSubmitting ? "TRANSMITTING ENCRYPTED DATA..." : "TRANSMIT SPECIFICATIONS"}
                 </button>
-                
-                <AnimatePresence>
-                   {isSuccess && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="bg-green-500 text-white text-[10px] font-black uppercase tracking-[0.2em] py-3 px-6 text-center shadow-lg"
-                      >
-                         Data Transmission Successful. Our Engineering Team Will Respond.
-                      </motion.div>
-                   )}
-                </AnimatePresence>
              </form>
           </motion.div>
 
-          {/* Info Side */}
-          <div className="space-y-16">
-             {/* Contact Info Modules */}
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Info Side - Floating Access Ports */}
+          <div className="space-y-12">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <motion.div 
-                   initial={{ opacity: 0, x: 20 }}
-                   animate={{ opacity: 1, x: 0 }}
-                   className="space-y-4"
+                   animate={{ y: [0, -10, 0] }}
+                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                   className="glass-frosted border-white/5 p-10 rounded-[3rem] space-y-6 flex flex-col items-center text-center shadow-xl group hover:border-accent/40 transition-colors"
                 >
-                   <div className="w-12 h-12 bg-primary flex items-center justify-center group transform transition-transform hover:rotate-12 cursor-pointer shadow-lg border-2 border-accent">
-                      <Smartphone className="text-accent" size={24} />
+                   <div className="w-16 h-16 glass-frosted rounded-2xl flex items-center justify-center border-accent/20 group-hover:rotate-12 transition-transform">
+                      <Smartphone className="text-accent" />
                    </div>
-                   <h4 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px]">Rapid Response Lines</h4>
-                   <div className="space-y-1">
-                      <p className="text-2xl font-black text-primary tracking-tighter hover:text-accent transition-colors">+91 {settings?.phone || "80725 24820"}</p>
-                      <p className="text-lg font-bold text-gray-400 tracking-tighter">+91 99945 77514</p>
+                   <div className="space-y-2">
+                      <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-accent/50">Primary Voice Channels</h4>
+                      <p className="text-xl font-black text-white tracking-tighter transition-colors">+91 {settings?.phone || "80725 24820"}</p>
+                      <p className="text-sm font-bold text-white/30 tracking-widest">+91 99945 77514</p>
                    </div>
                 </motion.div>
 
                 <motion.div 
-                   initial={{ opacity: 0, x: 20 }}
-                   animate={{ opacity: 1, x: 0 }}
-                   transition={{ delay: 0.1 }}
-                   className="space-y-4"
+                   animate={{ y: [0, 10, 0] }}
+                   transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                   className="glass-frosted border-white/5 p-10 rounded-[3rem] space-y-6 flex flex-col items-center text-center shadow-xl group hover:border-accent/40 transition-colors"
                 >
-                   <div className="w-12 h-12 bg-primary flex items-center justify-center group transform transition-transform hover:-rotate-12 cursor-pointer shadow-lg border-2 border-accent">
-                      <Mail className="text-accent" size={24} />
+                   <div className="w-16 h-16 glass-frosted rounded-2xl flex items-center justify-center border-accent/20 group-hover:-rotate-12 transition-transform">
+                      <Mail className="text-accent" />
                    </div>
-                   <h4 className="text-secondary font-black uppercase tracking-[0.4em] text-[10px]">Official Communication Channel</h4>
-                   <p className="text-lg font-black text-primary tracking-tighter hover:text-accent transition-colors">{settings?.email || "kavincivil2@gmail.com"}</p>
+                   <div className="space-y-2">
+                      <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-accent/50">Data Communication Path</h4>
+                      <p className="text-lg font-black text-white tracking-tighter transition-colors">{settings?.email || "kavincivil2@gmail.com"}</p>
+                   </div>
                 </motion.div>
              </div>
 
-             {/* Addresses */}
-             <div className="space-y-10 border-t border-gray-100 pt-16">
-                 <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="flex items-start space-x-6 group"
-                 >
-                    <div className="mt-1 w-12 h-12 bg-primary flex items-center justify-center group-hover:bg-accent transition-all duration-300 border-2 border-accent shadow-lg transform group-hover:rotate-12 group-hover:scale-110">
-                       <MapPin className="text-accent group-hover:text-primary transition-colors" size={24} />
-                    </div>
-                    <div className="space-y-2">
-                       <h4 className="text-secondary font-black uppercase tracking-[0.3em] text-[10px]">Primary HQ - Erode</h4>
-                       <p className="text-xl font-black text-primary tracking-tighter leading-tight group-hover:text-accent transition-colors">
-                          {settings?.address || "29, A.P.T Road, Veerappan Chatram (PO), Erode – 638004"}
-                       </p>
-                    </div>
-                 </motion.div>
-
-                 <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="flex items-start space-x-6 group"
-                 >
-                    <div className="mt-1 w-12 h-12 bg-primary flex items-center justify-center group-hover:bg-accent transition-all duration-300 border-2 border-accent shadow-lg transform group-hover:-rotate-12 group-hover:scale-110">
-                       <MapPin className="text-accent group-hover:text-primary transition-colors" size={24} />
-                    </div>
-                    <div className="space-y-2">
-                       <h4 className="text-secondary font-black uppercase tracking-[0.3em] text-[10px]">Secondary Annex</h4>
-                       <p className="text-xl font-black text-primary tracking-tighter leading-tight group-hover:text-accent transition-colors">
-                          Fire Service 106, Gandhiji Rd, Periyar Nagar,<br />Erode, Tamil Nadu – 638001
-                       </p>
-                    </div>
-                 </motion.div>
-
+             {/* Locations - Wide Glass Sliders */}
+             <div className="space-y-8">
+                  {[
+                    { label: "Engineering HQ - Chatram", addr: settings?.address || "29, A.P.T Road, Veerappan Chatram (PO), Erode – 638004" },
+                    { label: "Secondary Site - Annex", addr: "Fire Service 106, Gandhiji Rd, Periyar Nagar, Erode, TN – 638001" }
+                  ].map((loc, i) => (
+                    <motion.div 
+                       key={i}
+                       animate={{ x: i % 2 === 0 ? [0, 5, 0] : [0, -5, 0] }}
+                       transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                       className="glass-frosted border-white/5 p-8 rounded-[2.5rem] flex items-center space-x-8 group hover:bg-white/5 transition-all shadow-xl"
+                    >
+                       <div className="w-16 h-16 glass-frosted rounded-2xl flex items-center justify-center border-accent/20 group-hover:scale-110 transition-transform">
+                          <MapPin className="text-accent" />
+                       </div>
+                       <div className="space-y-1">
+                          <h4 className="text-[8px] font-black uppercase tracking-[0.4em] text-accent/40">{loc.label}</h4>
+                          <p className="text-white text-lg font-black tracking-tighter leading-tight group-hover:text-accent transition-colors">
+                             {loc.addr}
+                          </p>
+                       </div>
+                    </motion.div>
+                  ))}
              </div>
 
-             {/* Real Google Map Embed for Kavin */}
+             {/* 3D Satellite Projection (Map) */}
              <motion.div 
-               initial={{ opacity: 0, scale: 0.95 }}
-               animate={{ opacity: 1, scale: 1 }}
-               transition={{ delay: 0.4 }}
-               className="relative aspect-video bg-gray-100 border-2 border-gray-100 overflow-hidden shadow-xl"
+               animate={{ scale: [1, 1.02, 1] }}
+               transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+               className="relative aspect-video glass-frosted rounded-[4rem] border-accent/10 overflow-hidden shadow-2xl group"
              >
+                {/* HUD Elements over Map */}
+                <div className="absolute top-8 right-8 z-10 glass-frosted p-4 rounded-2xl border-white/10 opacity-60 pointer-events-none flex flex-col items-end">
+                   <div className="w-12 h-12 glass-frosted rounded-full border border-accent/30 flex items-center justify-center mb-4 animate-spin-slow">
+                      <Globe size={18} className="text-accent" />
+                   </div>
+                   <div className="text-[8px] font-mono text-white tracking-[0.4em]">SAT_LOCK: ACTIVE</div>
+                </div>
+
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3912.0199725689613!2d77.72481387402492!3d11.333250648678332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba96fdc947c1361%3A0xf911f0737052b33d!2sKavin%20construction%20and%20surveyors(KCS)!5e0!3m2!1sen!2sin!4v1775587436012!5m2!1sen!2sin" 
-                  className="absolute inset-0 w-full h-full border-0"
+                  className="absolute inset-x-0 inset-y-0 w-full h-full border-0 grayscale invert contrast-150 brightness-50 opacity-100 mix-blend-screen group-hover:filter-none transition-all duration-2000"
                   allowFullScreen="" 
                   loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
+                
+                <div className="absolute inset-0 border-[20px] border-black/20 pointer-events-none rounded-[4rem]" />
              </motion.div>
           </div>
         </div>
@@ -245,7 +290,7 @@ export default function ContactPage() {
           to { transform: rotate(360deg); }
         }
         .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
+          animation: spin-slow 15s linear infinite;
         }
       `}</style>
     </div>

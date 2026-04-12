@@ -37,86 +37,103 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
-      {/* Background Architectural Grid */}
-      <div className="absolute inset-0 bg-blueprint opacity-[0.03] pointer-events-none" />
+    <section className="py-24 bg-transparent relative overflow-hidden">
+      {/* 3D Architectural Atmos */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/images/luxury_commercial_building_finished_1775760519839.png"
+          alt="Site Review"
+          fill
+          unoptimized={true}
+          className="object-cover opacity-10 brightness-50 mix-blend-overlay"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+      </div>
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-32">
           <motion.h4 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-secondary font-black uppercase tracking-[0.4em] text-sm mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="text-accent font-black uppercase tracking-[0.5em] text-[10px] md:text-xs mb-8 p-3 glass-frosted rounded-full border-white/5 inline-block"
           >
-            Client Feedback
+            Client Intelligence Sync
           </motion.h4>
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black text-primary uppercase tracking-tighter leading-none"
+            className="text-fluid-md font-black text-white uppercase tracking-tighter leading-[0.85]"
           >
-            What Our <span className="text-accent underline decoration-primary/5">Clients Say</span>
+            Sectors <span className="text-accent">Recognized</span> <br/> Structural Validation
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pt-10">
           {testimonials.map((testimonial, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              animate={{ 
+                y: i % 2 === 0 ? [0, 15, 0] : [0, -15, 0]
+              }}
+              transition={{ 
+                duration: 10 + i, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: i * 0.2
+              }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-gray-50 p-8 border-2 border-gray-100 relative group hover:border-accent transition-all duration-500"
+              className="glass-frosted p-10 rounded-[3.5rem] border-white/5 relative group hover:border-accent/40 transition-all shadow-2xl flex flex-col"
             >
-              <Quote className="absolute top-6 right-6 text-primary/10 w-12 h-12 rotate-12 group-hover:text-accent/20 transition-colors" />
+              <Quote className="absolute top-10 right-10 text-accent/10 w-16 h-16 rotate-12 group-hover:text-accent/30 transition-all duration-700" />
               
-              <div className="flex space-x-1 mb-6">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={14} className="fill-accent text-accent" />
+              <div className="flex space-x-2 mb-10">
+                {[...Array(testimonial.rating)].map((_, starI) => (
+                  <Star key={starI} size={16} className="fill-accent text-accent drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
                 ))}
               </div>
 
-              <p className="text-primary font-bold leading-relaxed mb-8 italic">
+              <p className="text-white/60 font-black tracking-tighter text-lg leading-relaxed mb-12 italic uppercase">
                 "{testimonial.content}"
               </p>
 
-              <div className="mt-auto pt-6 border-t border-gray-200 flex items-center space-x-4">
-                <div className="w-12 h-12 bg-white border border-gray-200 flex items-center justify-center p-1 shadow-sm">
+              <div className="mt-auto pt-8 border-t border-white/10 flex items-center space-x-6">
+                <div className="w-14 h-14 glass-frosted border-accent/20 rounded-2xl flex items-center justify-center p-2 group-hover:scale-110 transition-transform">
                   <Image 
                     src="/images/kcs-logo.png" 
                     alt="KCS Logo" 
                     width={40} 
                     height={40} 
-                    className="object-contain"
+                    className="object-contain brightness-125"
                   />
                 </div>
                 <div>
-                  <h4 className="text-primary font-black uppercase tracking-widest text-xs leading-none mb-1">
+                  <h4 className="text-white font-black uppercase tracking-[0.2em] text-[10px] leading-tight mb-2">
                     {testimonial.name}
                   </h4>
-                  <p className="text-[10px] font-bold text-secondary uppercase tracking-widest">
-                    {testimonial.role} • {testimonial.date}
+                  <p className="text-[8px] font-black text-white/30 uppercase tracking-[0.4em]">
+                    {testimonial.role} • SYNC_{testimonial.date.split(' ')[0]}
                   </p>
                 </div>
+              </div>
+
+              {/* HUD Badge */}
+              <div className="absolute top-8 left-8 p-1 glass-frosted rounded-full border-accent/10 opacity-40 select-none">
+                 <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Dynamic call to action */}
+        {/* Global Access Port */}
         <motion.div 
            initial={{ opacity: 0 }}
            whileInView={{ opacity: 1 }}
-           viewport={{ once: true }}
-           transition={{ delay: 0.5 }}
-           className="mt-20 text-center"
+           className="mt-32 text-center"
         >
-           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">
-              Trusted by 100+ satisfied clients across Tamil Nadu
+           <p className="text-[10px] font-black uppercase tracking-[0.6em] text-white/20 select-none">
+              Trusted by 100+ verified structural entities across tamil nadu
            </p>
         </motion.div>
       </div>
