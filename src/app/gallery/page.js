@@ -2,180 +2,153 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, X, Ruler, Triangle, Box } from "lucide-react";
+import { Maximize2, X, Ruler, Triangle, Box, Image as ImageIcon } from "lucide-react";
 import { useProjectStore } from "@/store/useProjectStore";
-
-export default function GalleryPage() {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const { gallery: galleryImages } = useProjectStore();
-  return (
-    <>
 import Image from "next/image";
+import { Oswald, Urbanist, Bebas_Neue } from "next/font/google";
+
+const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"] });
+const urbanist = Urbanist({ weight: ["400", "500", "600", "700", "900"], subsets: ["latin"] });
+const oswald = Oswald({ weight: ["400", "600", "700"], subsets: ["latin"] });
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState(null);
   const { gallery: galleryImages } = useProjectStore();
-  
+
   return (
-    <div className="bg-transparent min-h-screen pt-32 pb-24 overflow-hidden relative selection:bg-accent selection:text-primary">
-      {/* 3D Architectural Atmos */}
-      <div className="fixed inset-0 z-0">
-        <Image 
-          src="/images/luxury_commercial_building_finished_1775760519839.png"
-          alt="Architectural Render"
-          fill
-          unoptimized={true}
-          className="object-cover opacity-10 brightness-50 mix-blend-overlay scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+    <div className="w-full bg-[#f9f8f4] text-[#111] min-h-screen font-sans selection:bg-[#ffe400] selection:text-[#111] overflow-x-hidden pt-32 pb-24">
+      
+      {/* Background Ambience */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]">
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#111 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Cinematic Header */}
-        <div className="max-w-4xl mb-32">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center space-x-6 mb-8"
-          >
-            <div className="w-20 h-[1px] bg-accent" />
-            <span className="text-accent font-black uppercase tracking-[0.5em] text-[10px] md:text-xs">Visual Repository</span>
-          </motion.div>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-fluid-lg font-black tracking-tighter text-white uppercase leading-[0.85] mb-12"
-          >
-             Precision <span className="text-accent">Gallery</span> <br/> Kinetic Archives
-          </motion.h1>
-          <motion.p 
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="text-white/40 text-xl font-black uppercase tracking-tighter max-w-2xl leading-relaxed"
-          >
-             A curated archive of high-precision land surveys and engineering structural layouts across Tamil Nadu.
-          </motion.p>
-        </div>
-
-        {/* Masonry Grid with Kinetic Drift */}
-        {galleryImages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-32 text-center glass-frosted rounded-[4rem] border-white/5">
-            <div className="w-24 h-24 glass-frosted flex items-center justify-center mb-8 border border-white/10 rounded-3xl">
-              <Maximize2 size={40} className="text-accent" />
+        <section className="py-12 md:py-20 w-full max-w-7xl mx-auto flex justify-center">
+          <div className="flex flex-col items-center text-center">
+            <div className="flex items-center gap-2 mb-4">
+              <ImageIcon className="w-5 h-5 text-[#111]" />
+              <h3 className={`${urbanist.className} text-[15px] font-bold text-[#111] uppercase tracking-widest`}>Visual Repository</h3>
             </div>
-            <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4">Archive Is Empty</h3>
-            <p className="text-white/30 text-[10px] uppercase tracking-widest font-black">Waiting for synchronization...</p>
+            <h1 className={`${bebas.className} text-7xl md:text-[10vw] leading-[0.85] text-[#111] m-0 p-0 tracking-[0.02em]`}>
+              PRECISION <span className="text-[#ffe400] drop-shadow-sm">GALLERY</span>
+            </h1>
+            <p className={`${urbanist.className} text-lg md:text-xl text-gray-600 font-medium max-w-3xl mt-8 leading-relaxed`}>
+               A curated archive of high-precision land surveys, architectural designs, and engineering projects across Tamil Nadu.
+            </p>
+          </div>
+        </section>
+
+        <div className="w-full h-[1.5px] bg-[#111] max-w-6xl mx-auto mb-16 md:mb-24"></div>
+
+        {/* Gallery Grid */}
+        {galleryImages.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-32 text-center bg-white rounded-[3rem] border border-gray-100 shadow-xl">
+            <div className="w-20 h-20 bg-gray-50 flex items-center justify-center mb-6 border border-gray-200 rounded-2xl">
+              <Maximize2 size={32} className="text-[#ffe400]" />
+            </div>
+            <h3 className={`${oswald.className} text-3xl font-bold text-[#111] uppercase tracking-tight mb-3`}>Archive Is Empty</h3>
+            <p className={`${urbanist.className} text-gray-500 text-sm font-bold uppercase tracking-widest`}>Waiting for synchronization...</p>
           </div>
         ) : (
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-12 space-y-12">
-           {galleryImages.map((image, i) => (
-             <motion.div
-               key={image.id}
-               initial={{ opacity: 0, scale: 0.95 }}
-               whileInView={{ opacity: 1, scale: 1 }}
-               animate={{ y: i % 2 === 0 ? [0, 15, 0] : [0, -15, 0] }}
-               transition={{ 
-                 duration: 12 + i, 
-                 repeat: Infinity, 
-                 ease: "easeInOut",
-                 delay: i * 0.2
-               }}
-               viewport={{ once: true }}
-               onClick={() => setSelectedImage(image)}
-               className="relative break-inside-avoid group cursor-pointer overflow-hidden glass-frosted rounded-[3.5rem] border-white/5 shadow-2xl hover:border-accent/40 transition-all p-3"
-             >
-                <div className="relative aspect-auto overflow-hidden rounded-[3rem]">
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            {galleryImages.map((image, i) => (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                onClick={() => setSelectedImage(image)}
+                className="relative break-inside-avoid group cursor-pointer overflow-hidden bg-white rounded-[2.5rem] border border-gray-100 shadow-lg hover:shadow-2xl transition-all p-3"
+              >
+                <div className="relative overflow-hidden rounded-[2rem]">
                   <Image
                     src={image.src}
                     alt={image.title}
                     width={800}
                     height={1000}
-                    unoptimized={true}
-                    className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105 brightness-75 group-hover:brightness-100"
+                    unoptimized
+                    className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 brightness-95 group-hover:brightness-100"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  <div className="absolute bottom-6 left-6 right-6 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                    <h4 className={`${oswald.className} text-xl font-bold text-white uppercase tracking-tight`}>
+                      {image.title}
+                    </h4>
+                    <p className={`${urbanist.className} text-white/80 text-xs font-bold uppercase tracking-widest mt-1`}>
+                      {image.category || "Project Archive"}
+                    </p>
+                  </div>
                 </div>
-                
-                {/* Tech Content Overlay */}
-                <div className="absolute inset-0 z-10 p-12 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                    <div className="glass-frosted p-8 rounded-[2.5rem] border-accent/20 translate-y-10 group-hover:translate-y-0 transition-transform duration-700">
-                       <h3 className="text-2xl font-black uppercase tracking-tighter mb-3 text-white">{image.title}</h3>
-                       <div className="flex items-center space-x-4">
-                          <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30">
-                             <Maximize2 size={16} className="text-accent" />
-                          </div>
-                          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">{image.category}</p>
-                       </div>
-                    </div>
-                </div>
-                
-                {/* HUD Coordinates (Top Left) */}
-                <div className="absolute top-8 left-8 flex flex-col space-y-2 opacity-0 group-hover:opacity-40 transition-opacity select-none">
-                   <div className="text-[8px] font-black text-white font-mono">X: {400 + (i*10)}.00</div>
-                   <div className="text-[8px] font-black text-white font-mono">Y: {600 + (i*10)}.00</div>
-                </div>
-             </motion.div>
-           ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
         )}
-
       </div>
 
-      {/* Lightbox - Fluid Glass */}
+      {/* Lightbox Overlay */}
       <AnimatePresence>
-         {selectedImage && (
-           <motion.div
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             exit={{ opacity: 0 }}
-             className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-20"
-           >
-              <div onClick={() => setSelectedImage(null)} className="absolute inset-0 bg-black/80 backdrop-blur-3xl" />
-              
-              <motion.div
-                initial={{ scale: 0.9, y: 50 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 50 }}
-                className="relative z-10 w-full max-w-7xl h-full flex flex-col"
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 bg-white/60 backdrop-blur-md"
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="w-full max-w-6xl bg-white rounded-[3rem] overflow-hidden relative shadow-2xl border border-gray-200"
+            >
+              <button 
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-6 right-6 z-50 w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#111] hover:bg-[#ffe400] transition-colors shadow-lg border border-gray-200"
               >
-                  <div className="flex justify-end mb-4">
-                     <button onClick={() => setSelectedImage(null)} className="glass-frosted px-8 py-4 rounded-full text-white hover:text-accent transition-colors flex items-center space-x-4 font-black uppercase tracking-[0.3em] text-[10px] border-white/10">
-                        <span>Terminal Close</span> <X size={20} />
-                     </button>
-                  </div>
-                 
-                  <div className="relative w-full flex-grow glass-frosted rounded-[5rem] border-white/5 overflow-hidden group shadow-[0_0_200px_-50px_rgba(251,191,36,0.2)]">
-                    <Image 
-                       src={selectedImage.src} 
-                       alt={selectedImage.title}
-                       fill
-                       unoptimized={true}
-                       className="object-contain p-10 md:p-20" 
-                    />
-                    
-                    {/* Technical Spec HUD */}
-                    <div className="absolute bottom-12 left-12 p-10 glass-frosted border-accent/30 rounded-[3rem] max-w-xl">
-                       <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4 leading-none">{selectedImage.title}</h3>
-                       <div className="flex items-center space-x-8">
-                          <div className="flex items-center space-x-3 text-accent text-[9px] font-black uppercase tracking-[0.4em]">
-                             <Triangle className="animate-pulse" size={14} />
-                             <span>Architectural Spec</span>
-                          </div>
-                          <div className="w-[1px] h-4 bg-white/20" />
-                          <div className="text-white/40 text-[9px] font-black uppercase tracking-[0.3em]">{selectedImage.category} Reference</div>
-                       </div>
-                    </div>
+                <X size={24} />
+              </button>
 
-                    <div className="absolute top-12 right-12 hidden md:block">
-                       <div className="glass-frosted p-8 rounded-[2rem] border-white/10 flex flex-col items-end space-y-4">
-                          <div className="w-16 h-1 w-2 bg-accent opacity-50" />
-                          <div className="text-[8px] font-black text-white/30 font-mono tracking-widest text-right">COORD_SYS: DGPS_INDIA_TAMILNADU</div>
-                          <div className="text-[8px] font-black text-white/30 font-mono tracking-widest text-right">TIMESTAMP: {new Date().toISOString().split('T')[0]}</div>
-                       </div>
+              <div className="flex flex-col lg:flex-row h-full max-h-[85vh]">
+                <div className="flex-grow relative bg-gray-50 min-h-[40vh] lg:min-h-0">
+                  <Image 
+                    src={selectedImage.src}
+                    alt={selectedImage.title}
+                    fill
+                    unoptimized
+                    className="object-contain p-4 lg:p-8"
+                  />
+                </div>
+                <div className="w-full lg:w-[350px] p-8 lg:p-12 bg-white flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-gray-100">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-1 bg-[#ffe400]"></div>
+                    <span className={`${urbanist.className} text-[#111] font-bold tracking-widest uppercase text-xs`}>
+                      {selectedImage.category || "Visual Archive"}
+                    </span>
+                  </div>
+                  <h2 className={`${oswald.className} text-4xl font-bold text-[#111] uppercase tracking-tight mb-4`}>
+                    {selectedImage.title}
+                  </h2>
+                  <p className={`${urbanist.className} text-gray-600 font-medium leading-relaxed`}>
+                    {selectedImage.description || "Detailed high-precision engineering visual document capturing the architectural essence of the project."}
+                  </p>
+                  
+                  <div className="mt-10 pt-10 border-t border-gray-100 grid grid-cols-2 gap-6">
+                    <div>
+                      <span className={`${urbanist.className} text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1`}>Location</span>
+                      <span className={`${oswald.className} text-sm text-[#111] font-bold uppercase`}>Tamil Nadu</span>
+                    </div>
+                    <div>
+                      <span className={`${urbanist.className} text-[10px] text-gray-400 font-bold uppercase tracking-widest block mb-1`}>Scale</span>
+                      <span className={`${oswald.className} text-sm text-[#111] font-bold uppercase`}>1:100 Precision</span>
                     </div>
                   </div>
-              </motion.div>
-           </motion.div>
-         )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
