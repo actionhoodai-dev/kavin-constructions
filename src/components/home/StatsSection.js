@@ -64,7 +64,7 @@ export default function StatsSection() {
                 delay: i * 0.1
               }}
               viewport={{ once: true }}
-              className="glass-frosted p-10 md:p-12 rounded-[4rem] border-white/5 flex flex-col items-center text-center space-y-8 shadow-2xl relative group hover:border-accent/40 transition-all"
+              className="glass-frosted p-10 md:p-12 rounded-[4rem] border-primary/5 flex flex-col items-center text-center space-y-8 shadow-2xl relative group hover:border-accent/40 transition-all"
             >
               {/* HUD Element */}
               <div className="absolute top-8 right-8 w-8 h-8 border-t border-r border-accent/20 select-none opacity-40" />
@@ -74,10 +74,10 @@ export default function StatsSection() {
               </div>
               
               <div className="space-y-4">
-                <div className="text-5xl md:text-7xl font-black text-white tracking-tighter tabular-nums drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                <div className="text-5xl md:text-7xl font-black text-primary tracking-tighter tabular-nums drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
                   <Counter value={stat.value} />{stat.suffix}
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40 group-hover:text-white/80 transition-colors">{stat.label}</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary/60 group-hover:text-primary/90 transition-colors">{stat.label}</p>
               </div>
 
               {/* Kinetic Glow Base */}

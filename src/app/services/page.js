@@ -6,7 +6,11 @@ import { SERVICES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { Oswald, Urbanist, Bebas_Neue } from "next/font/google";
 
+const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"] });
+const urbanist = Urbanist({ weight: ["400", "500", "600", "700", "900"], subsets: ["latin"] });
+const oswald = Oswald({ weight: ["400", "600", "700"], subsets: ["latin"] });
 
 const iconMap = {
   Ruler, Box, Compass, Triangle, Pencil, Grid, Layers, MapPin, Gauge
@@ -21,9 +25,6 @@ const serviceImages = {
   "layout-planning": "/images/industrial_layout_plan_nano.png",
   "site-measurement": "/images/site_measurement_new.png"
 };
-
-
-
 
 const extendedServices = [
   ...SERVICES,
@@ -47,41 +48,31 @@ const extendedServices = [
 
 export default function ServicesPage() {
   return (
-    <div className="bg-transparent min-h-screen pt-32 pb-24 overflow-hidden relative selection:bg-accent selection:text-primary">
-      {/* 3D Architectural Background Atmosphere */}
-      <div className="fixed inset-0 z-0">
-        <Image 
-          src="/images/high_tech_surveying.png"
-          alt="High Tech Surveying"
-          fill
-          unoptimized={true}
-          className="object-cover opacity-10 brightness-50 mix-blend-overlay scale-125 blur-[1px]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
-      </div>
+    <div className="w-full bg-[#f9f8f4] text-[#111] min-h-screen font-sans selection:bg-[#ffe400] selection:text-[#111] overflow-x-hidden pt-32 pb-24">
+      
+      {/* Cinematic Header */}
+      <section className="py-12 md:py-20 w-full max-w-7xl mx-auto px-4 flex justify-center">
+        <div className="flex flex-col items-center text-center">
+          <div className="flex items-center gap-2 mb-4">
+            <svg className="w-5 h-5 text-black" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 21h16V7H4v14zm2-12h2v2H6V9zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm4-8h2v2h-2V9zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm4-8h2v2h-2V9zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zM2 21h2v2H2v-2zm18 0h2v2h-2v-2zM10 2v3h4V2h-4z" />
+            </svg>
+            <h3 className={`${urbanist.className} text-[15px] font-bold text-[#111] uppercase tracking-widest`}>Engineering Solutions</h3>
+          </div>
+          <h1 className={`${bebas.className} text-7xl md:text-[10vw] leading-[0.85] text-[#111] m-0 p-0 tracking-[0.02em]`}>
+            TECHNICAL <span className="text-[#ffe400] drop-shadow-sm">SERVICES</span>
+          </h1>
+          <p className={`${urbanist.className} text-lg md:text-xl text-gray-600 font-medium max-w-3xl mt-8 leading-relaxed`}>
+            Engineering structural accuracy and architectural vision through professional surveying and construction expertise.
+          </p>
+        </div>
+      </section>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10 text-center flex flex-col items-center">
-        <motion.div
-           initial={{ opacity: 0, scale: 0.9 }}
-           animate={{ opacity: 1, scale: 1 }}
-           className="w-24 h-[1px] bg-accent mb-12 shadow-[0_0_20px_rgba(251,191,36,0.5)]"
-        />
-        <motion.h1 
-           initial={{ opacity: 0, y: 30 }}
-           animate={{ opacity: 1, y: 0 }}
-           className="text-fluid-lg font-black tracking-tighter text-white uppercase leading-none mb-10"
-        >
-           Technical <span className="text-accent">Service</span> <br/> Architecture
-        </motion.h1>
-        <motion.p 
-           animate={{ y: [0, -5, 0] }}
-           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-           className="text-white/50 max-w-2xl text-xl font-black uppercase tracking-tighter leading-relaxed mb-24"
-        >
-           Engineering structural accuracy and architectural vision through professional surveying and construction expertise.
-        </motion.p>
+      <div className="w-full h-[1.5px] bg-[#111] max-w-6xl mx-auto my-12 md:my-16"></div>
 
-        <div className="grid grid-cols-1 gap-40 max-w-6xl mx-auto">
+      {/* Services List */}
+      <section className="py-12 w-full max-w-7xl mx-auto px-4">
+        <div className="flex flex-col gap-32">
            {extendedServices.map((service, index) => {
              const Icon = iconMap[service.icon] || Ruler;
              const isEven = index % 2 === 1;
@@ -98,104 +89,108 @@ export default function ServicesPage() {
                    isEven ? "lg:flex-row-reverse" : ""
                  )}
                >
-                 {/* Visual Side with Parallax */}
+                 {/* Visual Side */}
                  <div className="flex-1 w-full relative group">
                     <motion.div 
                       whileHover={{ scale: 1.02 }}
-                      className="aspect-video glass-frosted overflow-hidden relative rounded-[3rem] border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
+                      className="aspect-[4/3] bg-white overflow-hidden relative rounded-[2.5rem] shadow-2xl border border-gray-200"
                     >
-                       {/* Service Image Background */}
                        {serviceImages[service.id] && (
                         <motion.div 
                           className="absolute inset-0 z-0"
-                          style={{ y: index % 2 === 0 ? 20 : -20 }}
-                          whileInView={{ y: index % 2 === 0 ? -20 : 20 }}
+                          style={{ y: index % 2 === 0 ? 10 : -10 }}
+                          whileInView={{ y: index % 2 === 0 ? -10 : 10 }}
                           transition={{ duration: 2, ease: "easeOut" }}
                         >
                            <Image 
                               src={serviceImages[service.id]} 
                               alt={service.title} 
                               fill
-                              unoptimized={true}
-                              className="object-cover brightness-50 contrast-125 transition-transform duration-1000 group-hover:scale-110"
+                              unoptimized
+                              className="object-cover transition-transform duration-1000 group-hover:scale-110 filter grayscale hover:grayscale-0"
                            />
                         </motion.div>
                        )}
-
-                       <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent pointer-events-none" />
-                       
-                       {/* HUD Decoration */}
-                       <div className="absolute top-10 left-10 w-20 h-20 border-t border-l border-accent/40 opacity-50 select-none pointer-events-none" />
-                       <div className="absolute bottom-10 right-10 w-20 h-20 border-b border-r border-accent/40 opacity-50 select-none pointer-events-none" />
+                       <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent pointer-events-none" />
                     </motion.div>
                  </div>
 
+                 {/* Content Side */}
+                 <div className="flex-1 space-y-8 text-left bg-white p-10 md:p-14 rounded-[2.5rem] shadow-xl border border-gray-100 relative">
+                    {/* Index Background */}
+                    <span className={`${oswald.className} absolute -top-8 -right-4 text-[150px] font-bold text-gray-50 leading-none select-none z-0`}>
+                      0{index + 1}
+                    </span>
 
-                 {/* Content Side - Glass Card */}
-                 <motion.div 
-                    animate={{ y: [0, index % 2 === 0 ? 10 : -10, 0] }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                    className="flex-1 space-y-10 text-left glass-frosted p-12 md:p-16 rounded-[4rem] border-white/5"
-                 >
-                    <div className="flex items-center space-x-8">
-                       <span className="text-accent font-black text-7xl opacity-10 select-none tracking-tighter leading-none">0{index + 1}</span>
-                       <div className="h-[1px] flex-grow bg-white/10" />
-                       <div className="w-12 h-12 glass-frosted flex items-center justify-center rounded-2xl border-accent/20">
-                          <Icon className="text-accent" size={24} />
-                       </div>
-                    </div>
-
-                    <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.9]">{service.title}</h2>
-                    <p className="text-white/40 text-lg leading-relaxed font-medium">
-                       {service.description}
-                    </p>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                       {service.features.map(f => (
-                         <div key={f} className="flex items-center space-x-4 group bg-white/5 p-4 rounded-2xl border border-white/5 hover:border-accent/30 transition-all">
-                            <CheckCircle size={18} className="text-accent shrink-0" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors">{f}</span>
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-4 mb-6">
+                         <div className="w-12 h-12 bg-[#ffe400] flex items-center justify-center rounded-2xl shadow-md">
+                            <Icon className="text-[#111]" size={24} />
                          </div>
-                       ))}
-                    </div>
+                         <div className="h-[2px] flex-grow bg-gray-200" />
+                      </div>
 
-                    <div className="pt-6">
-                      <Link href="/contact" className="glass-frosted text-white inline-flex items-center px-12 py-6 text-[11px] font-black uppercase tracking-widest hover:bg-accent hover:text-primary transition-all shadow-[0_30px_60px_rgba(251,191,36,0.1)] group rounded-full">
-                         Engineering Consult <ArrowRight className="ml-4 transition-transform group-hover:translate-x-2" size={18} />
+                      <h2 className={`${oswald.className} text-4xl md:text-5xl lg:text-6xl font-bold text-[#111] uppercase tracking-tight leading-[1.1] mb-6`}>
+                        {service.title}
+                      </h2>
+                      
+                      <p className={`${urbanist.className} text-gray-600 text-lg leading-[1.8] font-medium mb-8`}>
+                         {service.description}
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                         {service.features.map(f => (
+                           <div key={f} className="flex items-center gap-3 group">
+                              <CheckCircle size={20} className="text-[#ffe400] shrink-0" />
+                              <span className={`${urbanist.className} text-sm font-bold text-[#111] group-hover:text-gray-600 transition-colors`}>{f}</span>
+                           </div>
+                         ))}
+                      </div>
+
+                      <Link href="/contact" className={`${oswald.className} inline-flex items-center px-8 py-4 bg-[#ffe400] text-[#111] text-[18px] font-bold uppercase tracking-widest hover:bg-[#111] hover:text-white transition-colors rounded-full shadow-md group`}>
+                         Request Consult <ArrowRight className="ml-3 transition-transform group-hover:translate-x-1" size={18} />
                       </Link>
                     </div>
-                 </motion.div>
+                 </div>
                </motion.div>
              );
            })}
         </div>
+      </section>
 
-        {/* Technical Capabilities Section - Immersive Glass Panel */}
+      <div className="w-full h-[1.5px] bg-[#111] max-w-6xl mx-auto my-12 md:my-16"></div>
+
+      {/* Technical Capabilities Section */}
+      <section className="py-16 w-full max-w-7xl mx-auto px-4 mb-16">
         <motion.div 
-           initial={{ opacity: 0, scale: 0.95 }}
-           whileInView={{ opacity: 1, scale: 1 }}
-           className="mt-60 glass-frosted p-12 md:p-24 rounded-[5rem] border-accent/20 relative group overflow-hidden shadow-[0_0_150px_-30px_rgba(251,191,36,0.1)]"
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="bg-white p-12 md:p-24 rounded-[3rem] relative overflow-hidden shadow-2xl border border-gray-100"
         >
-           <div className="absolute inset-0 bg-blueprint-fine opacity-5 pointer-events-none" />
+           <div className="absolute top-0 right-0 w-64 h-64 bg-[#ffe400]/5 rounded-bl-full pointer-events-none"></div>
            <div className="relative z-10 text-center flex flex-col items-center">
-              <div className="w-24 h-24 glass-frosted rounded-full flex items-center justify-center border-accent/40 mb-10 group-hover:rotate-12 transition-transform duration-700 shadow-[0_0_50px_rgba(251,191,36,0.2)]">
-                <Gauge size={48} className="text-accent" />
+              <div className="w-20 h-20 bg-[#ffe400] rounded-full flex items-center justify-center mb-10 shadow-lg">
+                <Gauge size={36} className="text-[#111]" />
               </div>
-              <h2 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter mb-10 leading-[0.85]">Elite <br/><span className="text-accent">Technical</span> Standards</h2>
-              <p className="text-white/40 font-black uppercase tracking-[0.5em] text-xs mb-16 max-w-4xl leading-relaxed">
+              <h2 className={`${oswald.className} text-5xl md:text-7xl font-bold text-[#111] uppercase tracking-tight mb-8 leading-[1.1]`}>
+                Elite <span className="text-[#ffe400]">Technical</span> Standards
+              </h2>
+              <p className={`${urbanist.className} text-gray-600 font-medium text-lg mb-12 max-w-3xl leading-relaxed`}>
                  We leverage advanced GPS mapping technology, total station instruments, and high-precision structural health software to ensure millimeter accuracy in every surveying project.
               </p>
-              <div className="flex flex-wrap justify-center gap-8">
+              <div className="flex flex-wrap justify-center gap-4">
                  {["GPS Accuracy", "3D Modeling", "Structural Audits", "Vastu Synergy"].map(tag => (
-                   <div key={tag} className="glass-frosted border-white/10 px-8 py-4 rounded-full flex items-center space-x-4 text-white font-black uppercase tracking-[0.3em] text-[10px] shadow-xl group/tag hover:border-accent transition-colors">
-                      <div className="w-3 h-3 bg-accent animate-pulse shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
+                   <div key={tag} className={`${urbanist.className} bg-[#f9f8f4] border border-gray-100 px-6 py-3 rounded-full flex items-center gap-3 text-[#111] font-bold uppercase tracking-widest text-xs shadow-sm`}>
+                      <div className="w-2 h-2 bg-[#ffe400] rounded-full" />
                       <span>{tag}</span>
                    </div>
                  ))}
               </div>
            </div>
         </motion.div>
-      </div>
+      </section>
+
     </div>
   );
 }

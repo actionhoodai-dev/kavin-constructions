@@ -47,7 +47,7 @@ export default function PageTransition({ children }) {
                className="relative z-10 w-64 h-64 bg-white p-4 rounded-sm shadow-2xl mb-12 flex items-center justify-center"
              >
                 <img 
-                  src="/images/kcs-logo.png" 
+                  src="/images/kcs-logo-without-bg.png" 
                   alt="Kavin Logo" 
                   className="w-full h-full object-contain"
                 />
@@ -56,7 +56,7 @@ export default function PageTransition({ children }) {
 
              
              {/* Technical Progress Bar */}
-             <div className="relative w-64 h-1 bg-white/10 overflow-hidden">
+             <div className="relative w-64 h-1 bg-primary/10 overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
@@ -82,7 +82,7 @@ export default function PageTransition({ children }) {
              <div className="absolute inset-0 bg-blueprint-fine opacity-10" />
              <div className="relative w-40 h-40 bg-white p-3 rounded-sm opacity-50 flex items-center justify-center">
                 <img 
-                  src="/images/kcs-logo.png" 
+                  src="/images/kcs-logo-without-bg.png" 
                   alt="Kavin Logo" 
                   className="w-full h-full object-contain"
                 />

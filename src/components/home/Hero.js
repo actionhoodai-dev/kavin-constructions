@@ -60,7 +60,7 @@ export default function Hero() {
           </div>
 
           {/* Technical Labels */}
-          <div className="absolute -top-4 -left-4 bg-primary text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest shadow-lg">
+          <div className="absolute -top-4 -left-4 bg-primary text-primary text-[10px] font-bold px-3 py-1 uppercase tracking-widest shadow-lg">
             LAT: 11.3410° N
           </div>
           <div className="absolute -bottom-4 -right-4 bg-accent text-primary text-[10px] font-bold px-3 py-1 uppercase tracking-widest shadow-lg">
@@ -103,7 +103,7 @@ export default function Hero() {
           >
             <Link
               href="/services"
-              className="bg-primary text-white px-10 py-5 text-sm font-black uppercase tracking-widest hover:bg-charcoal transition-all shadow-[6px_6px_0px_0px_#FBBF24]"
+              className="bg-primary text-primary px-10 py-5 text-sm font-black uppercase tracking-widest hover:bg-charcoal transition-all shadow-[6px_6px_0px_0px_#FBBF24]"
             >
               Explore Services
             </Link>

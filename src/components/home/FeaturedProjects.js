@@ -49,14 +49,14 @@ export default function FeaturedProjects() {
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-fluid-md font-black tracking-tighter text-white uppercase leading-[0.85]"
+              className="text-fluid-md font-black tracking-tighter text-primary uppercase leading-[0.85]"
             >
               Structural <span className="text-accent">Excellence</span> <br/> Kinetic Archives
             </motion.h2>
           </div>
-          <Link href="/projects" className="group flex items-center space-x-6 text-white/40 hover:text-accent font-black uppercase tracking-[0.3em] text-[10px] transition-all mb-12 md:mb-0">
+          <Link href="/projects" className="group flex items-center space-x-6 text-primary/60 hover:text-accent font-black uppercase tracking-[0.3em] text-[10px] transition-all mb-12 md:mb-0">
              <span>Browse Full Project Explorer</span>
-             <div className="w-14 h-14 glass-frosted border-white/10 rounded-2xl flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:scale-110 group-hover:rotate-12 transition-all shadow-xl">
+             <div className="w-14 h-14 glass-frosted border-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:scale-110 group-hover:rotate-12 transition-all shadow-xl">
                 <ArrowUpRight size={20} className="group-hover:text-primary transition-colors" />
              </div>
           </Link>
@@ -78,7 +78,7 @@ export default function FeaturedProjects() {
                 delay: i * 0.1
               }}
               viewport={{ once: true }}
-              className="group relative glass-frosted p-4 overflow-hidden aspect-[4/5] flex flex-col cursor-pointer rounded-[4rem] border border-white/5 hover:border-accent/30 transition-all shadow-2xl"
+              className="group relative glass-frosted p-4 overflow-hidden aspect-[4/5] flex flex-col cursor-pointer rounded-[4rem] border border-primary/5 hover:border-accent/30 transition-all shadow-2xl"
             >
               {/* Image Layer within Glass Shell */}
               <div className="relative flex-grow overflow-hidden rounded-[3.5rem]">
@@ -103,11 +103,11 @@ export default function FeaturedProjects() {
                     <MapPin size={12} className="text-accent" />
                     <span>{project.location}</span>
                  </div>
-                 <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-[0.9] group-hover:text-accent transition-colors">
+                 <h3 className="text-3xl font-black text-primary uppercase tracking-tighter leading-[0.9] group-hover:text-accent transition-colors">
                     {project.title}
                  </h3>
-                 <div className="flex items-center justify-between border-t border-white/10 pt-6">
-                    <div className="flex items-center space-x-4 text-white/30 text-[9px] font-black uppercase tracking-[0.3em]">
+                 <div className="flex items-center justify-between border-t border-primary/10 pt-6">
+                    <div className="flex items-center space-x-4 text-primary/50 text-[9px] font-black uppercase tracking-[0.3em]">
                        <Calendar size={14} />
                        <span>{project.date}</span>
                     </div>
@@ -115,7 +115,7 @@ export default function FeaturedProjects() {
               </div>
 
               {/* HUD Corner Marker */}
-              <div className="absolute bottom-10 right-10 w-12 h-12 glass-frosted rounded-full border border-white/10 opacity-40 flex items-center justify-center animate-spin-slow pointer-events-none">
+              <div className="absolute bottom-10 right-10 w-12 h-12 glass-frosted rounded-full border border-primary/10 opacity-40 flex items-center justify-center animate-spin-slow pointer-events-none">
                  <div className="w-1 h-1 bg-accent rounded-full" />
               </div>
             </motion.div>

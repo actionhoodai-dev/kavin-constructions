@@ -3,153 +3,117 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { Bebas_Neue, Oswald, Urbanist } from "next/font/google";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Ruler, Triangle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
-import { useProjectStore } from "@/store/useProjectStore";
-
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Projects", href: "/projects" },
-  { name: "Gallery", href: "/gallery" },
-  { name: "Contact", href: "/contact" },
-];
+const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"] });
+const oswald = Oswald({ weight: ["400", "700"], subsets: ["latin"] });
+const urbanist = Urbanist({ weight: ["400", "700"], subsets: ["latin"] });
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { settings } = useProjectStore();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 50);
     };
-    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isOpen]);
+  const navLinks = [
+    { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Projects", href: "/projects" },
+    { name: "Contact", href: "/contact" },
+  ];
 
   return (
-    <nav
+    <nav 
       className={cn(
-        "fixed top-0 left-0 w-full z-[100] transition-all duration-500",
-        scrolled 
-          ? "bg-slate-950/80 backdrop-blur-md border-b border-white/5 py-4" 
-          : "bg-transparent py-8"
+        "fixed top-0 left-0 w-full z-[200] transition-all duration-500 py-4 px-6 md:px-12",
+        scrolled ? "bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm py-3" : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-6 md:px-10">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center group relative z-[110]">
-             <div className="relative h-12 w-12 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden transition-all group-hover:bg-white/10 group-hover:scale-105">
-              <Image 
-                src="/images/kcs-logo.png" 
-                alt="KAVIN CONSTRUCTIONS"
-                fill
-                unoptimized={true}
-                className="object-contain p-2 brightness-200 contrast-150"
-              />
-            </div>
-
-            <div className="ml-4 flex flex-col">
-              <span className="text-xl font-black tracking-tighter leading-none text-white">KAVIN</span>
-              <span className="text-[7px] font-black uppercase tracking-[0.4em] text-accent leading-none mt-1">CONSTRUCTIONS & SURVEYORS</span>
-            </div>
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={cn(
-                  "relative text-[10px] font-black uppercase tracking-[0.3em] transition-all group/nav",
-                  pathname === link.href ? "text-accent" : "text-white/50 hover:text-white"
-                )}
-              >
-                {link.name}
-                <div className={cn(
-                  "absolute -bottom-1.5 left-0 w-full h-[2px] bg-accent transition-all duration-300",
-                  pathname === link.href ? "opacity-100 scale-100" : "opacity-0 scale-0 group-hover/nav:opacity-100 group-hover/nav:scale-50"
-                )} />
-              </Link>
-            ))}
-            <Link
-              href="/contact"
-              className="bg-accent text-primary px-8 py-3 text-[9px] font-black uppercase tracking-[0.4em] hover:bg-white hover:text-primary transition-all rounded-full shadow-lg active:scale-95"
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/" className="relative w-[80px] h-[80px] md:w-[100px] md:h-[100px] transition-transform hover:scale-105">
+          <Image src="/images/kcs-logo-without-bg.png" alt="KCS Logo" fill className="object-contain" priority unoptimized />
+        </Link>
+        
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-1 bg-[#F6F1E8] border border-[#C7B798] rounded-full px-2 py-1.5 shadow-sm">
+          {navLinks.map((link) => (
+            <Link 
+              key={link.name}
+              href={link.href} 
+              className={cn(
+                `${bebas.className} text-2xl px-6 py-1.5 rounded-full transition-all tracking-wide`,
+                pathname === link.href 
+                  ? "bg-[#ffe400] text-[#111]" 
+                  : "text-[#111] hover:text-[#111] hover:bg-[#ffe400]"
+              )}
             >
-              Get Expert Advice
+              {link.name.toUpperCase()}
             </Link>
-          </div>
-
-          <button
-            className="md:hidden text-white relative z-[110]"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          ))}
         </div>
+        
+        {/* CTA Button */}
+        <Link 
+          href="/contact" 
+          className={`${oswald.className} hidden md:block bg-[#ffe400] text-[#111] px-8 py-3 rounded-full text-lg md:text-[20px] leading-none uppercase hover:bg-yellow-400 transition-all shadow-md active:scale-95 font-bold`}
+        >
+          GET IN TOUCH
+        </Link>
+
+        {/* Mobile Toggle */}
+        <button 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 text-[#111] focus:outline-none"
+        >
+          <div className="w-8 h-6 flex flex-col justify-between items-end">
+            <span className={cn("w-full h-0.5 bg-[#111] transition-all origin-right", mobileMenuOpen && "-rotate-45 translate-y-[-2px]")} />
+            <span className={cn("w-2/3 h-0.5 bg-[#111] transition-all", mobileMenuOpen && "opacity-0")} />
+            <span className={cn("w-full h-0.5 bg-[#111] transition-all origin-right", mobileMenuOpen && "rotate-45 translate-y-[2px]")} />
+          </div>
+        </button>
       </div>
 
-      {/* Mobile Nav - Holographic Terminal */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {isOpen && (
+        {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 backdrop-blur-3xl z-[100] md:hidden flex flex-col justify-center items-center p-12 text-center"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl md:hidden overflow-hidden"
           >
-            <div className="absolute inset-0 bg-blueprint-fine opacity-5 pointer-events-none" />
-            
-            <div className="flex flex-col space-y-10 relative z-10 w-full">
-              {navLinks.map((link, i) => (
-                <motion.div
+            <div className="flex flex-col gap-6 py-8 px-6">
+              {navLinks.map((link) => (
+                <Link 
                   key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  href={link.href} 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    `${bebas.className} text-5xl tracking-wide`,
+                    pathname === link.href ? "text-[#ffe400]" : "text-[#111]"
+                  )}
                 >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "text-5xl md:text-7xl font-black uppercase tracking-tighter italic block",
-                      pathname === link.href ? "text-accent" : "text-white/20 hover:text-white"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
+                  {link.name.toUpperCase()}
+                </Link>
               ))}
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="pt-16 mt-16 border-t border-white/5"
+              <Link 
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className={`${oswald.className} bg-[#111] text-white py-4 rounded-full text-center text-2xl uppercase tracking-widest`}
               >
-                <p className="text-[10px] font-black text-accent/40 tracking-[0.6em] uppercase mb-8">Structural Terminal Status: ACTIVE</p>
-                <div className="space-y-4">
-                   <p className="text-2xl font-black text-white tracking-tighter italic">+91 {settings?.phone || "80725 24820"}</p>
-                   <p className="text-lg font-bold text-white/30 tracking-widest">{settings?.email || "kavincivil2@gmail.com"}</p>
-                </div>
-              </motion.div>
+                Get In Touch
+              </Link>
             </div>
           </motion.div>
         )}
@@ -157,3 +121,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
