@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Target, Eye, Compass } from "lucide-react";
 import { Oswald, Urbanist, Bebas_Neue } from "next/font/google";
 
 const bebas = Bebas_Neue({ weight: "400", subsets: ["latin"] });
@@ -148,7 +149,9 @@ export default function AboutPage() {
                className="bg-white p-12 rounded-[2.5rem] space-y-6 shadow-xl border border-gray-100 flex flex-col hover:-translate-y-2 transition-transform duration-500"
              >
                 <div className="w-16 h-16 bg-[#ffe400] flex items-center justify-center rounded-2xl shadow-md">
-                   <div className="w-8 h-8 rounded-full border-[3px] border-[#ffe400]"></div>
+                   {i === 0 && <Target className="text-[#111]" size={32} />}
+                   {i === 1 && <Eye className="text-[#111]" size={32} />}
+                   {i === 2 && <Compass className="text-[#111]" size={32} />}
                 </div>
                 <h4 className={`${oswald.className} text-3xl font-bold text-[#111] uppercase tracking-tight`}>{v.title}</h4>
                 <p className={`${urbanist.className} text-gray-600 font-medium leading-[1.8] text-[17px]`}>{v.text}</p>
