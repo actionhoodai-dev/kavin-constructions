@@ -147,8 +147,8 @@ export default function ServicesPage() {
                          ))}
                       </div>
 
-                      <Link href="/contact" className={`${oswald.className} inline-flex items-center px-8 py-4 bg-[#ffe400] text-[#111] text-[18px] font-bold uppercase tracking-widest hover:bg-[#111] hover:text-white transition-colors rounded-full shadow-md group`}>
-                         Request Consult <ArrowRight className="ml-3 transition-transform group-hover:translate-x-1" size={18} />
+                      <Link href="/contact" className={`${oswald.className} inline-flex items-center px-10 py-4 bg-[#ffe400] text-[#111] text-[20px] leading-[20px] font-normal uppercase hover:bg-[#111] hover:text-white transition-colors rounded-full shadow-md group`}>
+                         Request Consult <ArrowRight className="ml-3 transition-transform group-hover:translate-x-1" size={24} />
                       </Link>
                     </div>
                  </div>

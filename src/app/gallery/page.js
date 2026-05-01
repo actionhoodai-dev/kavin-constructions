@@ -127,7 +127,7 @@ export default function GalleryPage() {
                       {selectedImage.category || "Visual Archive"}
                     </span>
                   </div>
-                  <h2 className={`${oswald.className} text-4xl font-bold text-[#111] uppercase tracking-tight mb-4`}>
+                  <h2 className={`${oswald.className} text-4xl font-black text-[#111] uppercase tracking-tight mb-4`}>
                     {selectedImage.title}
                   </h2>
                   <p className={`${urbanist.className} text-gray-600 font-medium leading-relaxed`}>

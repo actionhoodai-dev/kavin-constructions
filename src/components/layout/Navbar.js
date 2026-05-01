@@ -52,13 +52,13 @@ export default function Navbar() {
               key={link.name}
               href={link.href} 
               className={cn(
-                `${bebas.className} text-2xl px-6 py-1.5 rounded-full transition-all tracking-wide`,
+                `${oswald.className} text-[20px] leading-[20px] px-8 py-4 rounded-full transition-all uppercase font-normal`,
                 pathname === link.href 
                   ? "bg-[#ffe400] text-[#111]" 
                   : "text-[#111] hover:text-[#111] hover:bg-[#ffe400]"
               )}
             >
-              {link.name.toUpperCase()}
+              {link.name}
             </Link>
           ))}
         </div>
@@ -66,9 +66,9 @@ export default function Navbar() {
         {/* CTA Button */}
         <Link 
           href="/contact" 
-          className={`${oswald.className} hidden md:block bg-[#ffe400] text-[#111] px-8 py-3 rounded-full text-lg md:text-[20px] leading-none uppercase hover:bg-yellow-400 transition-all shadow-md active:scale-95 font-bold`}
+          className={`${oswald.className} hidden md:block bg-[#121212] text-white px-10 py-4.5 rounded-full text-[20px] leading-[20px] uppercase hover:bg-black transition-all shadow-md active:scale-95 font-normal backdrop-blur-[50px]`}
         >
-          GET IN TOUCH
+          CONTACT US
         </Link>
 
         {/* Mobile Toggle */}
@@ -87,34 +87,35 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl md:hidden overflow-hidden"
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-[210] bg-white p-8 flex flex-col items-center justify-center space-y-8 animate-in fade-in slide-in-from-top duration-300"
           >
-            <div className="flex flex-col gap-6 py-8 px-6">
+            <button 
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute top-8 right-8 text-[#111]"
+            >
+              <X size={32} />
+            </button>
               {navLinks.map((link) => (
                 <Link 
                   key={link.name}
                   href={link.href} 
                   onClick={() => setMobileMenuOpen(false)}
-                  className={cn(
-                    `${bebas.className} text-5xl tracking-wide`,
-                    pathname === link.href ? "text-[#ffe400]" : "text-[#111]"
-                  )}
+                  className={`${oswald.className} text-[20px] leading-[20px] text-[#111] hover:text-[#ffe400] transition-colors uppercase font-normal`}
                 >
-                  {link.name.toUpperCase()}
+                  {link.name}
                 </Link>
               ))}
               <Link 
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className={`${oswald.className} bg-[#111] text-white py-4 rounded-full text-center text-2xl uppercase tracking-widest`}
+                href="/contact" 
+                onClick={() => setMobileMenuOpen(false)} 
+                className={`${oswald.className} bg-[#121212] text-white px-10 py-4.5 rounded-full text-[20px] leading-[20px] font-normal uppercase transition-all shadow-xl`}
               >
-                Get In Touch
+                CONTACT US
               </Link>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

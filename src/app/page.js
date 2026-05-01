@@ -70,10 +70,10 @@ export default function Home() {
               Delivering accurate surveying and reliable construction services across Erode and beyond. Licensed Building Surveyor <span className="text-[#ffe400] font-bold">Er. R. Kavin Kumar</span> leading structural excellence.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/services" className={`${oswald.className} bg-[#ffe400] text-[#121212] px-6 py-2.5 rounded-full text-[14px] font-bold uppercase hover:bg-yellow-400 transition-all shadow-lg`}>
+              <Link href="/services" className={`${oswald.className} bg-[#ffe400] text-[#121212] px-10 py-4.5 rounded-full text-[20px] leading-[20px] font-normal uppercase hover:bg-yellow-400 transition-all shadow-lg`}>
                 EXPLORE SERVICES
               </Link>
-              <Link href="/contact" className={`${oswald.className} bg-[#111] text-white px-6 py-2.5 rounded-full text-[14px] font-bold uppercase hover:bg-black transition-all shadow-lg border border-white/10`}>
+              <Link href="/contact" className={`${oswald.className} bg-[#121212] text-white px-10 py-4.5 rounded-full text-[20px] leading-[20px] font-normal uppercase hover:bg-black transition-all shadow-lg border border-white/10`}>
                 GET A QUOTE
               </Link>
             </div>

@@ -142,7 +142,7 @@ export default function ContactPage() {
                 <button 
                    type="submit"
                    disabled={isSubmitting}
-                   className={`${oswald.className} w-full bg-[#ffe400] text-[#111] hover:bg-[#111] hover:text-white py-5 px-10 rounded-full text-[18px] font-bold uppercase tracking-widest transition-all shadow-xl active:scale-95 disabled:opacity-50`}
+                   className={`${oswald.className} w-full bg-[#ffe400] text-[#111] hover:bg-[#111] hover:text-white px-10 py-4 rounded-full text-[20px] leading-[20px] font-normal uppercase transition-all shadow-xl active:scale-95 disabled:opacity-50`}
                 >
                    {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
                 </button>

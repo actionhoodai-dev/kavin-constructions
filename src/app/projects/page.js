@@ -49,7 +49,7 @@ export default function ProjectsPage() {
                     key={cat}
                     onClick={() => setFilter(cat)}
                     className={cn(
-                      `${oswald.className} px-6 py-2.5 text-sm font-bold uppercase tracking-widest transition-all rounded-full`,
+                      `${oswald.className} px-8 py-3 text-[20px] leading-[20px] font-normal uppercase transition-all rounded-full`,
                       activeFilter === cat 
                         ? "bg-[#ffe400] text-[#111] shadow-md scale-105" 
                         : "text-gray-500 hover:text-[#111] hover:bg-gray-100"
